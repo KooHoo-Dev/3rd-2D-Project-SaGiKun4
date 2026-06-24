@@ -1,19 +1,26 @@
-using UnityEditor.MPE;
 using UnityEngine;
 
-public class MobMovement : MonoBehaviour
+public class MobState : MonoBehaviour
 {
     [SerializeField] private Transform[] mapPoint;
     private Vector3 goalPoint;
     private Vector3 currentPoint;
+    private int mapPointIndex = 0;
 
     private float speed = 1.0f;
-    private int mapPointIndex = 0;
-    
+    public int currentHp;
+
+    public void OnEnabled()
+    {
+        currentHp = 10;
+    }
 
     private void Update()
     {
-        Move();
+        if(currentHp >= 0)
+            Move();
+        else
+            Dead();
     }
 
     private void Move()
@@ -28,5 +35,16 @@ public class MobMovement : MonoBehaviour
 
             if(mapPointIndex >= mapPoint.Length) mapPointIndex = 0;
         }
+    }
+
+    private void Dead()
+    {
+        gameObject.SetActive(false);
+        //그냥 애니메이터만 바꿔주면 될듯
+    }
+
+    public void TakeDamage(int damage)
+    {
+        currentHp -= damage;
     }
 }
