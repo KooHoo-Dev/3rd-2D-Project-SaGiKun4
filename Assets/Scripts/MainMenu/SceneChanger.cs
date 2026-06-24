@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.SceneManagement; // 씬 제어를 위한 기능들이 담겨있는 네임스페이스
+using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {
