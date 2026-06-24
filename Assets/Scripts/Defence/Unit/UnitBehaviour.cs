@@ -10,6 +10,7 @@ public class UnitBehaviour : MonoBehaviour
     public int damage {get; private set;} = 1;
     
     public float attackSpeed {get; private set;} = 1.0f;
+    public float waitTime {get; private set;} = 2.0f;
 
     private void Update()
     {
