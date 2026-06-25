@@ -16,6 +16,7 @@ public class Unit : MonoBehaviour
     {
         spriteFlipper = GetComponent<Transform>();
         attackBehaviour = GetComponent<UnitAttack>();
+        attackTimer = attackSpeed;
     }
 
     private void Update()
