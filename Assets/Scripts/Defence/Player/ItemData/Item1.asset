@@ -9,12 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74cd4f471347fa54dbf252f591d3b1b5, type: 3}
-  m_Name: InventoryItem
-  m_EditorClassIdentifier: Assembly-CSharp::Item
-  Key: 1
-  Name: 1
-  Description: 1
+  m_Script: {fileID: 11500000, guid: f7425f7dbdb8ca04db1dbb592baa52f7, type: 3}
+  m_Name: Item1
+  m_EditorClassIdentifier: Assembly-CSharp::BuyItem
+  Key: 0
+  Tier: 1
+  Name: asd
+  Description: asd
   Icon: {fileID: -1892338737, guid: 8b1cfe75ffad30543b876db8240468eb, type: 3}
   Price: 1
-  Count: 50
+  Count: 1
+  attackData: {fileID: 11400000, guid: b783429e5f8eff64a9b23659bd3c8815, type: 2}
+  item: {fileID: 11400000}

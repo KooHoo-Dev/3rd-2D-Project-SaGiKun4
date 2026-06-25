@@ -15,7 +15,6 @@ public class Unit : MonoBehaviour
     private void OnEnable()
     {
         spriteFlipper = GetComponent<Transform>();
-        attackBehaviour = GetComponent<UnitAttack>();
         attackTimer = attackSpeed;
     }
 
@@ -27,7 +26,7 @@ public class Unit : MonoBehaviour
         {
             attackTimer = 0;
 
-            attackBehaviour.Attack(mobs);
+            attackBehaviour.Attack(this, mobs);
         }
 
         if(mobs.Count > 0)

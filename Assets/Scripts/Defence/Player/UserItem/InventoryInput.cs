@@ -58,13 +58,18 @@ public class InventoryInput : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         //  3.3 종료된 위치의 Slot에 아이템이 있을 경우
 
         Vector2 eventPos = Camera.main.ScreenToWorldPoint(eventData.position);
-        RaycastHit2D hit = Physics2D.Raycast(eventPos, Vector2.zero);
-        if (hit.collider != null)
+        
+        RaycastHit2D[] hits = Physics2D.RaycastAll(eventPos, Vector2.zero);
+        
+        if (hits != null)
         {
-            if (hit.collider.CompareTag("Unit"))
+            foreach (RaycastHit2D hit in hits)
             {
-                // 유닛쪽 실행 코드
-                Debug.Log("유닛 실행");
+                if (hit.collider.CompareTag("Unit"))
+                {
+                    // 유닛쪽 실행 코드
+                    Debug.Log("유닛 실행");
+                }
             }
         }
 

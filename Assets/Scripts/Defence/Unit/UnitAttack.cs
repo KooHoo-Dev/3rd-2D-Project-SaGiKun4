@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class UnitAttack : MonoBehaviour
+public abstract class UnitAttack : ScriptableObject
 {
-    public abstract void Attack(List<MobState> mobs);
+    public abstract void Attack(Unit unit, List<MobState> mobs);
 }
