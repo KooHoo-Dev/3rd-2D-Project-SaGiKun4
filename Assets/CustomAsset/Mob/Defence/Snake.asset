@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1152b3a7fd399a409c259247e3858cd, type: 3}
+  m_Name: Snake
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterData
+  maxHp: 20
+  moveSpeed: 1
+  material: {fileID: 2100000, guid: c6102303cd9da3d42ba3f56bebf38fc1, type: 2}
+  animatorController: {fileID: 9100000, guid: 20196f3741631f14e8c43924a5ddcd91, type: 2}

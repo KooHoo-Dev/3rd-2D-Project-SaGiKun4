@@ -2,25 +2,69 @@ using UnityEngine;
 
 public class MobState : MonoBehaviour
 {
+    private readonly int startPoint = 0;
+    private enum RoadPointType
+    {
+        LeftBottom = 5,
+        RightTop = 8
+    }
+
+    private Animator animator;
+    private MeshRenderer meshRenderer;
+    private Transform spriteFlipper;
+
     [SerializeField] private Transform[] mapPoint;
-    private Vector3 goalPoint;
-    private Vector3 currentPoint;
+    [SerializeField] private Vector3 goalPoint;
+    [SerializeField] private Vector3 currentPoint;
     private int mapPointIndex = 0;
 
-    private float speed = 1.0f;
+    private float speed;
     public int currentHp;
+    public bool isDead = false;
 
-    public void OnEnabled()
+    public void OnEnable()
     {
-        currentHp = 10;
+        meshRenderer = GetComponentInChildren<MeshRenderer>();
+        spriteFlipper = GetComponentInChildren<Transform>();
+        animator = GetComponentInChildren<Animator>();
+    }
+
+    public void InitializeStat(MonsterData data, Transform[] roadPoints, Vector2 spawnPosition)
+    {
+        currentHp = data.maxHp;
+        speed = data.moveSpeed;
+        meshRenderer.material = data.material;
+        animator.runtimeAnimatorController = data.animatorController;
+        transform.position = spawnPosition;
+        spriteFlipper.localScale = Vector3.one;
+
+        mapPoint = roadPoints;
+        goalPoint = roadPoints[startPoint].position;
     }
 
     private void Update()
     {
-        if(currentHp >= 0)
-            Move();
-        else
+        if (isDead)
+        {
+            AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+
+            if (stateInfo.IsTag("Death") && stateInfo.normalizedTime >= 1f)
+            {
+                gameObject.SetActive(false);
+            }
+
+            return; // 죽었을때 Move 못들어가게
+        }
+
+        if(currentHp <= 0)
+        {
             Dead();
+        }
+        else
+        {
+            Move();
+        }
+            
     }
 
     private void Move()
@@ -30,17 +74,23 @@ public class MobState : MonoBehaviour
 
         if(currentPoint == goalPoint)
         {
+            // 뒤집기
+            if (mapPointIndex == (int)RoadPointType.LeftBottom || mapPointIndex == (int)RoadPointType.RightTop)
+            {
+                spriteFlipper.localScale = new Vector3(-1 * spriteFlipper.localScale.x, spriteFlipper.localScale.y, spriteFlipper.localScale.z);
+            }
+
             goalPoint = mapPoint[mapPointIndex].position;
             mapPointIndex++;
 
-            if(mapPointIndex >= mapPoint.Length) mapPointIndex = 0;
+            if(mapPointIndex >= mapPoint.Length) mapPointIndex = startPoint;
         }
     }
 
     private void Dead()
     {
-        gameObject.SetActive(false);
-        //그냥 애니메이터만 바꿔주면 될듯
+        isDead = true;
+        animator.SetTrigger("Death");
     }
 
     public void TakeDamage(int damage)
