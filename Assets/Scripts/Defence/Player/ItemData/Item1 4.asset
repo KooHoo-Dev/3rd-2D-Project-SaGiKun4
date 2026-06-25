@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7425f7dbdb8ca04db1dbb592baa52f7, type: 3}
   m_Name: Item1 4
   m_EditorClassIdentifier: Assembly-CSharp::BuyItem
-  Key: 8
+  Key: 4
   Tier: 1
   Name: asd
   Description: asd

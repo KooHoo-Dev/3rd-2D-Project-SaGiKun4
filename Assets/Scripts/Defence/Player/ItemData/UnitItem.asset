@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3276e973c0b264e49ba91e28c4f93657, type: 3}
   m_Name: UnitItem
   m_EditorClassIdentifier: Assembly-CSharp::SpawnUnit
-  Key: 2
+  Key: 0
   Tier: 0
   Name: ddd
   Description: ddd
