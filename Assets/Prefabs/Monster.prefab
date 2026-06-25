@@ -260,3 +260,4 @@ MonoBehaviour:
   goalPoint: {x: 0, y: 0, z: 0}
   currentPoint: {x: 0, y: 0, z: 0}
   currentHp: 0
+  isDead: 0
