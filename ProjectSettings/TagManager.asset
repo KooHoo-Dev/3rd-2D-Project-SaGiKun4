@@ -7,11 +7,12 @@ TagManager:
   - Portal
   - Monster
   - Unit
+  - Mob
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Wall
   - Water
   - UI
   - 
