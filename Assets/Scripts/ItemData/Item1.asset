@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BuyItem
   Key: 0
   Tier: 1
-  Name: asd
+  Name: "\uCC38\uC0C8"
   Description: asd
   Icon: {fileID: -1892338737, guid: 8b1cfe75ffad30543b876db8240468eb, type: 3}
   Price: 1

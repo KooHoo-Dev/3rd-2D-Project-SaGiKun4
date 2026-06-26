@@ -46,17 +46,17 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        if (grid == null)
-            return;
+    // private void OnDrawGizmos()
+    // {
+    //     if (grid == null)
+    //         return;
 
-        foreach (Node node in grid)
-        {
-            Gizmos.color = node.walkable ? Color.green : Color.red;
-            Gizmos.DrawWireCube(node.worldPosition, Vector2.one * cellSize);
-        }
-    }
+    //     foreach (Node node in grid)
+    //     {
+    //         Gizmos.color = node.walkable ? Color.green : Color.red;
+    //         Gizmos.DrawWireCube(node.worldPosition, Vector2.one * cellSize);
+    //     }
+    // }
 
     public Node NodePositionFromWorldPoint(Vector2 worldPosition)
     {

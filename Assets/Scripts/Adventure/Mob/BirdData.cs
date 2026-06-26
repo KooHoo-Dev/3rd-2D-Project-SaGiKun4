@@ -9,4 +9,5 @@ public class BirdData : ScriptableObject
     public float defaultSpeed;
     public float runSpeed;
     public BirdType birdType;
+    public Item dropItem;
 }

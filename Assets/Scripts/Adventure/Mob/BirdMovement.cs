@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BirdMovement : MonoBehaviour
@@ -54,6 +55,7 @@ public class BirdMovement : MonoBehaviour
     private float returnAllowDistance = 1f;
     private BirdSkill currentSkill;
     private List<BirdSkill> skills;
+    [SerializeField] private GameObject dropItem;
 
     private void Awake()
     {
@@ -79,6 +81,11 @@ public class BirdMovement : MonoBehaviour
     {
         if(myHp <= 0)
         {
+            dropItem = Instantiate(dropItem);
+            dropItem.transform.position = transform.position;
+            DropItem dropitem1 = dropItem.AddComponent<DropItem>();
+            dropitem1.ItemInitialized(birdData.dropItem);
+            
             gameObject.SetActive(false);
         }
 
