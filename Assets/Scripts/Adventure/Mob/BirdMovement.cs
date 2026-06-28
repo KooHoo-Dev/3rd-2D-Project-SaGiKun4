@@ -83,7 +83,7 @@ public class BirdMovement : MonoBehaviour
         {
             dropItem = Instantiate(dropItem);
             dropItem.transform.position = transform.position;
-            DropItem dropitem1 = dropItem.AddComponent<DropItem>();
+            DropItem dropitem1 = dropItem.GetComponent<DropItem>();
             dropitem1.ItemInitialized(birdData.dropItem);
             
             gameObject.SetActive(false);
