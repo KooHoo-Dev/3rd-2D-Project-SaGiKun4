@@ -1,11 +1,11 @@
 using UnityEngine;
 
-[CreateAssetMenu]
-public class SpawnUnit : Item
+[CreateAssetMenu(fileName = "InventoryItem", menuName = "Item/DefenceSpawn")]
+public class DefenceSpawn : Item
 {
     public Unit unitPrefab;
 
-    public override bool CanBuy(UnitSpawner spawner)
+    public bool CanBuy(UnitSpawner spawner)
     {
         return spawner.FindEmptySlot() != -1;
     }

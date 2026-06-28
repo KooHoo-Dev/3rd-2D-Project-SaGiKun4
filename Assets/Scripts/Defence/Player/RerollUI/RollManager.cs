@@ -15,17 +15,19 @@ public class RollManager : MonoBehaviour
 
     private void InitializeItems()
     {
-        foreach (Item item in allItems)
+        tierItems.Clear();
+
+        foreach (Item defenceItem in allItems)
         {
-            if (!UnlockManager.Instance.IsUnlocked(item))
+            if (!UnlockManager.Instance.IsUnlocked(defenceItem))
                 continue;
 
-            if (!tierItems.ContainsKey(item.Tier))
+            if (!tierItems.ContainsKey(defenceItem.Tier))
             {
-                tierItems[item.Tier] = new List<Item>();
+                tierItems.Add(defenceItem.Tier, new List<Item>());
             }
 
-            tierItems[item.Tier].Add(item);
+            tierItems[defenceItem.Tier].Add(defenceItem);
         }
     }
 
@@ -33,7 +35,7 @@ public class RollManager : MonoBehaviour
     {
         int roll = Random.Range(0, 100);
 
-        if (roll < 25)
+        if (roll < 35)
             return ItemTier.Unit;
 
         if (roll < 60)

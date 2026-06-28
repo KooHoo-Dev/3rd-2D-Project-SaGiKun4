@@ -13,5 +13,6 @@ public class ItemButtonBehaviour : MonoBehaviour
     public void OnClick()
     {
         item.Buy(spawner);
+        ContentController.Instance.Refresh();
     }
 }
