@@ -8,10 +8,12 @@ public class InventoryInput : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     [field:SerializeField] public CursorSlot CursorSlot {get; private set;}
     private Item selectedItem;
     private GraphicRaycaster raycaster;
+    [SerializeField] private ScrollRect scrollRect;
 
     private void Start()
     {
         raycaster = GetComponent<GraphicRaycaster>();
+        scrollRect  = GetComponent<ScrollRect>();
     }
 
     private Item GetItemOrNull(PointerEventData eventData)
@@ -22,7 +24,6 @@ public class InventoryInput : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
 
         foreach (RaycastResult result in results)
         {
-            Debug.Log(result);
             if (result.gameObject.TryGetComponent(out ItemSlot item))
             {
                 return item.item;
@@ -37,20 +38,23 @@ public class InventoryInput : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         // 시작 슬롯을 검색한다
         selectedItem = GetItemOrNull(eventData);
         if(selectedItem == null) return;
-        
+
+        scrollRect.enabled = false;
         CursorSlot.SetItem(selectedItem);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        if(selectedItem == null) return;
+        if (selectedItem == null) return;
         
         CursorSlot.SetPosition(eventData.position);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if(selectedItem == null) return;
+        if (selectedItem == null) return;
+
+        scrollRect.enabled = true;
 
         // 3. 드래그가 종료되면 상황에 따라 알맞은 처리를 한다
         //  3.1 종료된 위치의 Slot 자체가 없을 경우
@@ -67,7 +71,9 @@ public class InventoryInput : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
             {
                 if (hit.collider.CompareTag("Unit"))
                 {
-                    // 유닛쪽 실행 코드
+                    Unit hitUnit = hit.collider.GetComponent<Unit>();
+                    hitUnit.EquipItem(selectedItem);
+                    ContentController.Instance.Refresh();
                     Debug.Log("유닛 실행");
                 }
             }
