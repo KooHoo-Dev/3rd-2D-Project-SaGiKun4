@@ -2,6 +2,7 @@ using Study.Utilities;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using static UnityEditor.Progress;
 
 public class Pod : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class Pod : MonoBehaviour
         {
             if(SimpleInput.GetKey(Key.Space))
             {
-                SceneManager.LoadScene("GameMenu");
+                AdventureManager.Instance.QuitAdventure();
             }
         }
     }
