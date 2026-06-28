@@ -7,7 +7,7 @@ public class PlayerInteract : MonoBehaviour
     private InteractionPoint currentPoint;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Portal"))
+        if (collision.CompareTag("Point"))
         {
             currentPoint = collision.GetComponent<InteractionPoint>();
         }
@@ -15,7 +15,7 @@ public class PlayerInteract : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Portal"))
+        if (collision.CompareTag("Point"))
         {
             currentPoint = null;
         }
