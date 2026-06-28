@@ -5,16 +5,22 @@ public class Unit : MonoBehaviour
 {
     [SerializeField] private float attackSpeed;
     [SerializeField] private DetectedArea detectedArea;
+    [SerializeField] private UnitAttack defaultAttackBehaviour;
     [SerializeField] private UnitAttack attackBehaviour;
+    
     public List<MobState> mobs {get; private set;} = new();
     private Transform spriteFlipper;
 
     private float attackTimer;
+
+    public bool HasItem { get; private set; }
+    public Item EquippedItem { get; private set; }
     public int damage {get; private set;} = 10;
 
     private void OnEnable()
     {
         spriteFlipper = GetComponent<Transform>();
+        attackBehaviour = defaultAttackBehaviour;
         attackTimer = attackSpeed;
     }
 
@@ -38,5 +44,30 @@ public class Unit : MonoBehaviour
 
             spriteFlipper.localScale = new Vector3(sign * spriteFlipper.localScale.x, spriteFlipper.localScale.y, spriteFlipper.localScale.z);
         }
+    }
+
+    public void EquipItem(Item item)
+    {
+        if (HasItem) return;
+
+        EquippedItem = item;
+        HasItem = true;
+
+        attackBehaviour = item.attackData;
+
+        Debug.Log($"{name} 아이템 장착: {item.Name}");
+    }
+
+    public void RemoveItem()
+    {
+        if (!HasItem) return;
+
+        InventoryManager.Instance.Inventory.AddItem(EquippedItem);
+        ContentController.Instance.Refresh();
+
+        HasItem = false;
+        EquippedItem = null;
+
+        attackBehaviour = defaultAttackBehaviour;
     }
 }
