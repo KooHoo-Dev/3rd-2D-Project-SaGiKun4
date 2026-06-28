@@ -78,4 +78,15 @@ public class PlayerBehaviour : MonoBehaviour
             animator.SetTrigger("Attack");
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Item"))
+        {
+            if (collision.TryGetComponent(out DropItem dropItem))
+            {
+                UnlockManager.Instance.Unlock(dropItem.Item);
+            }
+        }
+    }
 }
