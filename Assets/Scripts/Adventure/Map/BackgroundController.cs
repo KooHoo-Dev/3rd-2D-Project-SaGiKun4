@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class BackgroundController : MonoBehaviour
 {
-    private const float SunsetPlayerMinPos = 45f;
-    private const float SunsetPlayerMaxPos = 65f;
+    private const float SunsetPlayerMinPos = 80f;
+    private const float SunsetPlayerMaxPos = 95f;
 
     [SerializeField] Transform backgroundGroup2;
 

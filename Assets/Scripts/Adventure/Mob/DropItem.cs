@@ -2,26 +2,26 @@ using UnityEngine;
 
 public class DropItem : MonoBehaviour
 {
-    private BoxCollider2D col2D;
     private SpriteRenderer spriteRenderer;
+    public Item Item { get; private set; }
 
-    private void Start()
+    private void Awake()
     {
-        col2D = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public void ItemInitialized(Item item)
+    public void ItemInitialized(Item inputItem)
     {
-        Debug.Log(item.Icon);
-        spriteRenderer.sprite = item.Icon;
+        Item = inputItem;
+        spriteRenderer.sprite = Item.Icon;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("플레이어 아이템 얻기");
+            InventoryManager.Instance.TempInventory.AddItem(Item);
+            gameObject.SetActive(false);
         }
     }
 }

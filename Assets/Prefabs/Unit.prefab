@@ -130,7 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Unit
   attackSpeed: 1
   detectedArea: {fileID: 5980010598677012795}
-  attackBehaviour: {fileID: 11400000, guid: b42ad3be8f6dd3140a499b0ab1567091, type: 2}
+  defaultAttackBehaviour: {fileID: 11400000, guid: b42ad3be8f6dd3140a499b0ab1567091, type: 2}
 --- !u!61 &7848929184163236707
 BoxCollider2D:
   m_ObjectHideFlags: 0
