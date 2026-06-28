@@ -31,12 +31,14 @@ public class MobState : MonoBehaviour
 
     public void InitializeStat(MonsterData data, Transform[] roadPoints, Vector2 spawnPosition)
     {
+        isDead = false;
         currentHp = data.maxHp;
         speed = data.moveSpeed;
         meshRenderer.material = data.material;
         animator.runtimeAnimatorController = data.animatorController;
         transform.position = spawnPosition;
         spriteFlipper.localScale = Vector3.one;
+        mapPointIndex = 0;
 
         mapPoint = roadPoints;
         goalPoint = roadPoints[startPoint].position;
@@ -50,6 +52,7 @@ public class MobState : MonoBehaviour
 
             if (stateInfo.IsTag("Death") && stateInfo.normalizedTime >= 1f)
             {
+                GameFlowManager.Instance.UnregisterMonster(this);
                 gameObject.SetActive(false);
             }
 
