@@ -15,7 +15,7 @@ public class SceneChanger : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("GameMenu");
+        SceneLoader.Instance.LoadScene("GameMenu");
     }
 
     public void ShowOption()

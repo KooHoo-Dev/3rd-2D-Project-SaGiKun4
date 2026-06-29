@@ -24,7 +24,7 @@ public class PlayerBehaviour : MonoBehaviour
     private bool canDamaged = true;
 
     public int damage {get; private set;} = 3;
-    public int currentHp {get; private set;} = 65;
+    public int currentHp {get; private set;} = 90;
     public int maxHp {get; private set;}
 
     private void Awake()

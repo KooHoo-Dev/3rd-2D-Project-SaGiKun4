@@ -23,11 +23,11 @@ public class AdventureManager : MonoBehaviour
         InventoryManager.Instance.Inventory.Merge(InventoryManager.Instance.TempInventory);
         InventoryManager.Instance.TempInventory.Clear();
         GameManager.Instance.QuitAdventure();
-        SceneManager.LoadScene("GameMenu");
+        SceneLoader.Instance.LoadScene("GameMenu");
     }
     public void FailAdventure()
     {
         InventoryManager.Instance.TempInventory.Clear();
-        SceneManager.LoadScene("GameMenu");
+        SceneLoader.Instance.LoadScene("GameMenu");
     }
 }
