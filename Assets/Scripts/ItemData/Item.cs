@@ -16,7 +16,7 @@ public enum AttackType
 }
 
 [CreateAssetMenu(fileName = "InventoryItem",menuName = "Item/InventoryItem")]
-public class Item : ScriptableObject
+public abstract class Item : ScriptableObject
 {
     public int Key; // 아이템을 찾을 Key
     public string Name; // 아이템의 명칭
@@ -25,5 +25,6 @@ public class Item : ScriptableObject
     public ItemTier Tier;
     public UnitAttack attackData;
 
-    public virtual void Buy() { }
+    public abstract bool CanBuy();
+    public abstract void Buy();
 }
