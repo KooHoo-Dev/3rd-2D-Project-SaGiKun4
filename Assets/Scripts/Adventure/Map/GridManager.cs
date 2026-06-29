@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
-    public static GridManager Instance;
+
+    /*
+     * !몹마다 지역배치 해줄꺼라 개별로 있어야함. 인스턴스로 쓰면 안됨!
+    */
 
     [SerializeField] private LayerMask wallLayer;
-
-    private Vector2 gridWorldSize;
     [SerializeField] private float cellSize = 1f;
-    [SerializeField] private BoxCollider2D worldArea;
+    [SerializeField] private BoxCollider2D area;
 
     private Node[,] grid;
 
@@ -19,15 +20,7 @@ public class GridManager : MonoBehaviour
 
     protected void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-
-        Bounds bounds = worldArea.bounds;
+        Bounds bounds = area.bounds;
         gridSizeX = Mathf.RoundToInt(bounds.size.x / cellSize);
         gridSizeY = Mathf.RoundToInt(bounds.size.y / cellSize);
 
@@ -38,7 +31,7 @@ public class GridManager : MonoBehaviour
     {
         grid = new Node[gridSizeX, gridSizeY];
 
-        Bounds bounds = worldArea.bounds;
+        Bounds bounds = area.bounds;
 
         Vector2 worldBottomLeft = new Vector2(bounds.min.x,bounds.min.y);
 
@@ -71,7 +64,7 @@ public class GridManager : MonoBehaviour
 
     public Node NodePositionFromWorldPoint(Vector2 worldPosition)
     {
-        Bounds bounds = worldArea.bounds;
+        Bounds bounds = area.bounds;
 
         int x = Mathf.FloorToInt((worldPosition.x - bounds.min.x) / cellSize );
 

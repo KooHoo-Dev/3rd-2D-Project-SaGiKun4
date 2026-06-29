@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Raven
   m_EditorClassIdentifier: Assembly-CSharp::BirdData
   hp: 10
-  damage: 0
+  damage: 5
   defaultSpeed: 2
   runSpeed: 3
   birdType: 1

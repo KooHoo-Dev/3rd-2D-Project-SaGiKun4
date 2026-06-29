@@ -24,8 +24,10 @@ public class BirdMovement : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     [SerializeField] private ParticleSystem hitEffect;
+
+    [SerializeField] private GridManager gridManager;
     private List<Node> path;
-    Node prevPlayerNode;
+    private Node prevPlayerNode;
     private int currentIndex;
 
     // 스폰 & Idle 행동 반경
@@ -221,7 +223,7 @@ public class BirdMovement : MonoBehaviour
 
     private bool PlayerNodeChange()
     {
-        Node currentNode = GridManager.Instance.NodePositionFromWorldPoint(Player.position);
+        Node currentNode = gridManager.NodePositionFromWorldPoint(Player.position);
 
         if (currentNode == prevPlayerNode)
             return false;
@@ -232,7 +234,7 @@ public class BirdMovement : MonoBehaviour
 
     private void SetPathToTarget(Vector2 target)
     {
-        path = PathFinder.Instance.FindPath(transform.position, target);
+        path = PathFinder.Instance.FindPath(gridManager, transform.position, target);
         currentIndex = 0;
     }
 
@@ -280,7 +282,7 @@ public class BirdMovement : MonoBehaviour
             Vector2 runDir = ((Vector2)transform.position - (Vector2)Player.position).normalized;
             Vector2 runPosition = (Vector2)transform.position + runDir;
 
-            Node targetNode = GridManager.Instance.NodePositionFromWorldPoint(runPosition);
+            Node targetNode = gridManager.NodePositionFromWorldPoint(runPosition);
 
             if (!targetNode.walkable)
             {
@@ -298,6 +300,14 @@ public class BirdMovement : MonoBehaviour
     {
         timer -= Time.deltaTime;
 
+        if (timer <= 0f)
+        {
+            targetPos = PickRandomPosition();
+            SetPathToTarget(targetPos);
+
+            timer = coolTime;
+        }
+
         if (path == null)
         {
             targetPos = PickRandomPosition();
@@ -311,14 +321,6 @@ public class BirdMovement : MonoBehaviour
         }
 
         Move(myDefaultSpeed);
-
-        if (timer <= 0f)
-        {
-            targetPos = PickRandomPosition();
-            SetPathToTarget(targetPos);
-
-            timer = coolTime;
-        }
     }
 
     private void Return()

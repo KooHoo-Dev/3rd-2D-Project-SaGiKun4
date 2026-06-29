@@ -16,10 +16,10 @@ public class PathFinder : MonoBehaviour
         Instance = this;
     }
 
-    public List<Node> FindPath(Vector2 startPos, Vector2 targetPos)
+    public List<Node> FindPath(GridManager grid, Vector2 startPos, Vector2 targetPos)
     {
-        Node startNode = GridManager.Instance.NodePositionFromWorldPoint(startPos);
-        Node targetNode = GridManager.Instance.NodePositionFromWorldPoint(targetPos);
+        Node startNode = grid.NodePositionFromWorldPoint(startPos);
+        Node targetNode = grid.NodePositionFromWorldPoint(targetPos);
 
         List<Node> openSet = new List<Node>();
         HashSet<Node> closedSet = new HashSet<Node>();
@@ -46,7 +46,7 @@ public class PathFinder : MonoBehaviour
                 return RetracePath(startNode, targetNode);
             }
 
-            foreach (Node neighbour in GridManager.Instance.GetNeighbours(currentNode))
+            foreach (Node neighbour in grid.GetNeighbours(currentNode))
             {
                 if (!neighbour.walkable)
                     continue;
