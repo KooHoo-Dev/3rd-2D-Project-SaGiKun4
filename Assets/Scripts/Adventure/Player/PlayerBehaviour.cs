@@ -1,6 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 
@@ -12,7 +12,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     private Rigidbody2D rigid;
 
-    [SerializeField] public List<BirdMovement> mobs = new();
+    [SerializeField] public ParticleSystem hitEffect;
 
     // New InputSystem
     private PlayerInput inputActions;
@@ -21,8 +21,11 @@ public class PlayerBehaviour : MonoBehaviour
     // 공격 기능용 방향
     private float lookDir = 1;
     private Vector3 originalScale;
+    private bool canDamaged = true;
 
-    public int damage = 1;
+    public int damage {get; private set;} = 3;
+    public int currentHp {get; private set;} = 65;
+    public int maxHp {get; private set;}
 
     private void Awake()
     {
@@ -33,6 +36,19 @@ public class PlayerBehaviour : MonoBehaviour
         inputActions = new PlayerInput();
 
         originalScale = transform.localScale;
+        
+        InitializeStat();
+
+        PlayerUIController.Instance.UpdateHealthUI();
+    }
+
+    private void InitializeStat()
+    {
+        canDamaged = true;
+
+        damage = damage + (7 * PlayerDataManager.Instance.Power);
+        maxHp = currentHp + (25  * PlayerDataManager.Instance.Health);
+        currentHp = maxHp;
     }
 
     private void OnEnable()
@@ -87,6 +103,41 @@ public class PlayerBehaviour : MonoBehaviour
             {
                 UnlockManager.Instance.Unlock(dropItem.Item);
             }
+        }   
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Mob"))
+        {
+            if (collision.TryGetComponent(out BirdMovement bird))
+            {
+                if(bird.myBirdType == BirdMovement.BirdType.Aggressive)
+                    StartCoroutine(DamageProcess(bird.myDamage));
+            }
+        }
+    }
+
+    private IEnumerator DamageProcess(int damage)
+    {
+        if (canDamaged)
+        {
+            canDamaged = false;
+            currentHp -= damage;
+            IsDead();
+            PlayerUIController.Instance.UpdateHealthUI();
+            hitEffect.gameObject.SetActive(false);
+            hitEffect.gameObject.SetActive(true);
+            yield return new WaitForSeconds(1f);
+            canDamaged = true;
+        }
+    }
+
+    private void IsDead()
+    {
+        if(currentHp <= 0)
+        {
+            AdventureManager.Instance.FailAdventure();
         }
     }
 }
