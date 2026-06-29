@@ -72,6 +72,7 @@ public class RollManager : MonoBehaviour
     {
         for (int i = 0; i < shopButtons.Length; i++)
         {
+            shopButtons[i].gameObject.SetActive(true);
             Item item = GetRandomItem();
             if (item != null)
             {
