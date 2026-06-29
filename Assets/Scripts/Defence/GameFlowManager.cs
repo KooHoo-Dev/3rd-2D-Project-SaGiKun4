@@ -15,6 +15,7 @@ public class GameFlowManager : MonoBehaviour
     [SerializeField] private TMP_Text scoreText;
     [field:SerializeField] public int killCount { get; private set; }
 
+    [field:SerializeField] public int defencePoint { get; set; }
     private float timer;
     [field: SerializeField] public bool IsRunning { get; private set; } = false;
 
@@ -69,6 +70,7 @@ public class GameFlowManager : MonoBehaviour
         timer = gameTime;
         IsRunning = true;
         killCount = 0;
+        defencePoint = 10;
         aliveMonsters.Clear();
         resultPanel.SetActive(false);
 
