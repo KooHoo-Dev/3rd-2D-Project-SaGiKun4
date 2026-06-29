@@ -2,12 +2,14 @@ using UnityEngine;
 
 public class UnitSpawner : MonoBehaviour
 {
+    public static UnitSpawner Instance { get; private set; }
     [SerializeField] private Transform[] slots;
 
     private Unit[] units;
 
     private void Awake()
     {
+        Instance = this;
         units = new Unit[slots.Length];
     }
 

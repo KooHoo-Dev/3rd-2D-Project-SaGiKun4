@@ -12,7 +12,7 @@ public class ItemButtonBehaviour : MonoBehaviour
 
     public void OnClick()
     {
-        item.Buy(spawner);
+        item.Buy();
         ContentController.Instance.Refresh();
     }
 }

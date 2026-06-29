@@ -3,15 +3,19 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "InventoryItem", menuName = "Item/DefenceFeather")]
 public class DefenceFeather : Item
 {
-    public bool CanBuy(UnitSpawner spawner)
+    public bool CanBuy()
     {
-        return true;
+        return GameFlowManager.Instance.defencePoint >= price;
     }
 
-    public override void Buy(UnitSpawner spawner)
+    public override void Buy()
     {
-        Debug.Log("구매완료" + Name);
-        InventoryManager.Instance.Inventory.AddItem(this);
-        ContentController.Instance.Refresh();
+        if (CanBuy())
+        {
+            Debug.Log("구매완료" + Name);
+            GameFlowManager.Instance.defencePoint = GameFlowManager.Instance.defencePoint - price;
+            InventoryManager.Instance.Inventory.AddItem(this);
+            ContentController.Instance.Refresh();
+        }
     }
 }
