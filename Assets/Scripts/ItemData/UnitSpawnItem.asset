@@ -12,4 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68ae56b6aa851844eaa16009859bae41, type: 3}
   m_Name: UnitSpawnItem
   m_EditorClassIdentifier: Assembly-CSharp::DefenceSpawn
+  Key: 0
+  Name: 
+  price: 1
+  Icon: {fileID: 0}
+  Tier: 0
+  attackData: {fileID: 0}
   unitPrefab: {fileID: 4939005982420572028, guid: 48c28773f72579747b5c84306bd911af, type: 3}
