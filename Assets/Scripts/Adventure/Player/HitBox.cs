@@ -10,11 +10,6 @@ public class HitBox : MonoBehaviour
         player = GetComponentInParent<PlayerBehaviour>();
     }
 
-    private void OnEnable()
-    {
-        checkList.Clear();
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.TryGetComponent<BirdMovement>(out BirdMovement bird))
@@ -30,6 +25,6 @@ public class HitBox : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        
+        checkList.Clear();
     }
 }

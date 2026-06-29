@@ -8,7 +8,7 @@ public class PlayerBehaviour : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float accel = 5f;
-    private Animator animator;
+    [SerializeField] private Animator childAnimator;
 
     private Rigidbody2D rigid;
 
@@ -30,8 +30,6 @@ public class PlayerBehaviour : MonoBehaviour
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
-
-        animator = GetComponent<Animator>();
 
         inputActions = new PlayerInput();
 
@@ -91,7 +89,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if (context.performed)
         {
-            animator.SetTrigger("Attack");
+            childAnimator.SetTrigger("Attack");
         }
     }
 
