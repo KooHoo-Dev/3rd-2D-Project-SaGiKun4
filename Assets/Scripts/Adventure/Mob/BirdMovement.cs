@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class BirdMovement : MonoBehaviour
@@ -20,13 +19,11 @@ public class BirdMovement : MonoBehaviour
         Ignore
     }
 
-    public BirdType myBirdType;
+    [field:SerializeField] public BirdType myBirdType {get; private set; }
 
     private SpriteRenderer spriteRenderer;
 
-    // A* 패스파인딩
-    [SerializeField] private PathFinder pathFinder;
-    [SerializeField] private GridManager gridManager;
+    [SerializeField] private ParticleSystem hitEffect;
     private List<Node> path;
     Node prevPlayerNode;
     private int currentIndex;
@@ -47,7 +44,8 @@ public class BirdMovement : MonoBehaviour
 
     // 새 기본 옵션
     [SerializeField] private BirdData birdData;
-    [SerializeField] private float myHp;
+    [SerializeField] private int myHp;
+    public int myDamage { get; private set; }
     private float myDefaultSpeed;
     private float myRunSpeed;
     private float reflectDistance = 5f;
@@ -69,6 +67,7 @@ public class BirdMovement : MonoBehaviour
         // 새 기본값 설정
         returnPos = Rigidbody2D.transform.position;
         myHp = birdData.hp;
+        myDamage = birdData.damage;
         myDefaultSpeed = birdData.defaultSpeed;
         myRunSpeed = birdData.runSpeed;
         myBirdType = birdData.birdType;
@@ -176,7 +175,7 @@ public class BirdMovement : MonoBehaviour
     {
         Vector2 myPos = transform.position;
         Vector2 PlayerPos = Player.position;
-        Vector2 dir = (PlayerPos - myPos);
+        Vector2 dir = PlayerPos - myPos;
 
         float distance = dir.magnitude;
         dir = dir.normalized;
@@ -222,7 +221,7 @@ public class BirdMovement : MonoBehaviour
 
     private bool PlayerNodeChange()
     {
-        Node currentNode = gridManager.NodePositionFromWorldPoint(Player.position);
+        Node currentNode = GridManager.Instance.NodePositionFromWorldPoint(Player.position);
 
         if (currentNode == prevPlayerNode)
             return false;
@@ -233,7 +232,7 @@ public class BirdMovement : MonoBehaviour
 
     private void SetPathToTarget(Vector2 target)
     {
-        path = pathFinder.FindPath(transform.position, target);
+        path = PathFinder.Instance.FindPath(transform.position, target);
         currentIndex = 0;
     }
 
@@ -281,7 +280,7 @@ public class BirdMovement : MonoBehaviour
             Vector2 runDir = ((Vector2)transform.position - (Vector2)Player.position).normalized;
             Vector2 runPosition = (Vector2)transform.position + runDir;
 
-            Node targetNode = gridManager.NodePositionFromWorldPoint(runPosition);
+            Node targetNode = GridManager.Instance.NodePositionFromWorldPoint(runPosition);
 
             if (!targetNode.walkable)
             {
@@ -360,5 +359,7 @@ public class BirdMovement : MonoBehaviour
     public void TakeDamage(int damage)
     {
         myHp -= damage;
+        hitEffect.gameObject.SetActive(true);
+        hitEffect.Play();
     }
 }

@@ -1,8 +1,11 @@
 using System.Collections.Generic;
+using Jay;
 using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
+    public static GridManager Instance;
+
     [SerializeField] private LayerMask wallLayer;
 
     private Vector2 gridWorldSize;
@@ -14,8 +17,16 @@ public class GridManager : MonoBehaviour
     private int gridSizeX;
     private int gridSizeY;
 
-    private void Awake()
+    protected void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+
         Bounds bounds = worldArea.bounds;
         gridSizeX = Mathf.RoundToInt(bounds.size.x / cellSize);
         gridSizeY = Mathf.RoundToInt(bounds.size.y / cellSize);

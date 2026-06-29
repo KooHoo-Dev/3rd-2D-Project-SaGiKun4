@@ -1,14 +1,25 @@
 using System.Collections.Generic;
+using Jay;
 using UnityEngine;
 
 public class PathFinder : MonoBehaviour
 {
-    [SerializeField] private GridManager gridManager;
+    public static PathFinder Instance;
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+    }
 
     public List<Node> FindPath(Vector2 startPos, Vector2 targetPos)
     {
-        Node startNode = gridManager.NodePositionFromWorldPoint(startPos);
-        Node targetNode = gridManager.NodePositionFromWorldPoint(targetPos);
+        Node startNode = GridManager.Instance.NodePositionFromWorldPoint(startPos);
+        Node targetNode = GridManager.Instance.NodePositionFromWorldPoint(targetPos);
 
         List<Node> openSet = new List<Node>();
         HashSet<Node> closedSet = new HashSet<Node>();
@@ -35,7 +46,7 @@ public class PathFinder : MonoBehaviour
                 return RetracePath(startNode, targetNode);
             }
 
-            foreach (Node neighbour in gridManager.GetNeighbours(currentNode))
+            foreach (Node neighbour in GridManager.Instance.GetNeighbours(currentNode))
             {
                 if (!neighbour.walkable)
                     continue;
