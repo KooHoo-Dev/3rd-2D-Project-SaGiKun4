@@ -12,7 +12,11 @@ public class ItemButtonBehaviour : MonoBehaviour
 
     public void OnClick()
     {
-        item.Buy();
+        if(item.CanBuy())
+        {
+            item.Buy();
+            gameObject.SetActive(false);
+        }
         ContentController.Instance.Refresh();
     }
 }
