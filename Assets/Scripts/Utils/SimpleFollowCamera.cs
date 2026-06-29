@@ -13,9 +13,10 @@ namespace Study.Utilities
         }
 
         [field:SerializeField] public Transform Target {get; set;}
-        [SerializeField] private float lerpSpeed; // 따라가는 속도, Damping 값
+        [field:SerializeField] public float lerpSpeed { get; set; } // 따라가는 속도, Damping 값
         [SerializeField] private Vector3 offset;
-        
+        [SerializeField] private float maxOffset = 5f;
+
         private Camera Cam {get; set;}
         private States State {get; set;} = States.Following;
 
@@ -59,6 +60,11 @@ namespace Study.Utilities
         public void OnChangeTarget(Transform target)
         {
             Target = target;
+        }
+
+        public void SetOffset(Vector2 offset)
+        {
+            this.offset = Vector3.ClampMagnitude(offset, maxOffset);
         }
     }    
 }

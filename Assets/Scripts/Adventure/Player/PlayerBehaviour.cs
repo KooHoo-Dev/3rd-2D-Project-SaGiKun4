@@ -1,3 +1,4 @@
+using Study.Utilities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,8 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float accel = 5f;
     [SerializeField] private Animator childAnimator;
+    [SerializeField] private LayerMask cameraMaskLayer;
+    [SerializeField] private SimpleFollowCamera followCamera;
 
     private Rigidbody2D rigid;
 
@@ -22,6 +25,7 @@ public class PlayerBehaviour : MonoBehaviour
     private float lookDir = 1;
     private Vector3 originalScale;
     private bool canDamaged = true;
+    private bool isAiming = false;
 
     public int damage {get; private set;} = 3;
     public int currentHp {get; private set;} = 90;
@@ -54,21 +58,27 @@ public class PlayerBehaviour : MonoBehaviour
         inputActions.Enable();
 
         inputActions.PlayerMove.Attack.performed += OnAttack;
-        //inputActions.PlayerMove.Aim.started += OnAimStarted;
-        //inputActions.PlayerMove.Aim.canceled += OnAimCanceled;
+        inputActions.PlayerMove.Aim.started += OnAimStarted;
+        inputActions.PlayerMove.Aim.canceled += OnAimCanceled;
     }
 
     private void OnDisable()
     {
         inputActions.PlayerMove.Attack.performed -= OnAttack;
-        //inputActions.PlayerMove.Aim.started -= OnAimStarted;
-        //inputActions.PlayerMove.Aim.canceled -= OnAimCanceled;
+        inputActions.PlayerMove.Aim.started -= OnAimStarted;
+        inputActions.PlayerMove.Aim.canceled -= OnAimCanceled;
 
         inputActions.Disable();
     }
 
     private void FixedUpdate()
     {
+        if (isAiming)
+        {
+            rigid.linearVelocity = Vector2.zero;
+            return;
+        }
+
         Vector2 targetVel = input * moveSpeed;
 
         rigid.linearVelocity = Vector2.Lerp(rigid.linearVelocity, targetVel, accel * Time.fixedDeltaTime);
@@ -84,12 +94,53 @@ public class PlayerBehaviour : MonoBehaviour
         }
         
         transform.localScale = new Vector3(originalScale.x * lookDir, originalScale.y, originalScale.z);
+
+        if (isAiming)
+        {
+            OnAiming();
+        }
     }
+
     public void OnAttack(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
             childAnimator.SetTrigger("Attack");
+        }
+    }
+
+    public void OnAimStarted(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            isAiming = true;
+            Debug.Log("Aim Start");
+        }
+    }
+
+    public void OnAiming()
+    {
+        Vector3 screenPos = Input.mousePosition;
+
+        screenPos.z = Mathf.Abs(Camera.main.transform.position.z - transform.position.z);
+
+        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(screenPos);
+
+        Vector2 offset = (Vector2)(mouseWorldPos - transform.position);
+
+        transform.localScale = new Vector3(originalScale.x * Mathf.Sign(offset.x), originalScale.y, originalScale.z);
+
+        followCamera.SetOffset(offset);
+        followCamera.lerpSpeed = 3;
+    }
+
+    public void OnAimCanceled(InputAction.CallbackContext context)
+    {
+        if (context.canceled)
+        {
+            isAiming = false;
+            followCamera.SetOffset(Vector2.zero);
+            followCamera.lerpSpeed = 1;
         }
     }
 
