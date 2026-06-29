@@ -20,10 +20,10 @@ public class Item : ScriptableObject
 {
     public int Key; // 아이템을 찾을 Key
     public string Name; // 아이템의 명칭
-    public string Description; // 아이템의 설명
+    public int price;
     public Sprite Icon; // 아이템의 Sprite 아이콘
     public ItemTier Tier;
     public UnitAttack attackData;
 
-    public virtual void Buy(UnitSpawner unitSpawner) { }
+    public virtual void Buy() { }
 }
