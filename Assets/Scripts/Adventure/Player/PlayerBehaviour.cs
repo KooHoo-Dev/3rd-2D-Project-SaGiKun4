@@ -25,7 +25,11 @@ public class PlayerBehaviour : MonoBehaviour
     private float lookDir = 1;
     private Vector3 originalScale;
     private bool canDamaged = true;
+
+    [SerializeField] private Bullet bulletPrefab;
+    [SerializeField] private Transform firePoint;
     private bool isAiming = false;
+    private Vector2 aimingOffset;
 
     public int damage {get; private set;} = 3;
     public int currentHp {get; private set;} = 90;
@@ -105,7 +109,15 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if (context.performed)
         {
-            childAnimator.SetTrigger("Attack");
+            if (isAiming)
+            {
+                Bullet bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+                bullet.Fire(aimingOffset.normalized, damage);
+            }
+            else
+            {
+                childAnimator.SetTrigger("Attack");
+            }
         }
     }
 
@@ -127,6 +139,8 @@ public class PlayerBehaviour : MonoBehaviour
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(screenPos);
 
         Vector2 offset = (Vector2)(mouseWorldPos - transform.position);
+
+        aimingOffset = offset.normalized;
 
         transform.localScale = new Vector3(originalScale.x * Mathf.Sign(offset.x), originalScale.y, originalScale.z);
 
