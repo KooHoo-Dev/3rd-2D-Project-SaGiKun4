@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: UnitSpawnItem
   m_EditorClassIdentifier: Assembly-CSharp::DefenceSpawn
   Key: 0
-  Name: 
+  Name: "\uC720\uB2DB \uC18C\uD658"
   price: 1
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: caa4364501bf22f458f8b0f23adb4e73, type: 3}
   Tier: 0
   attackData: {fileID: 0}
   unitPrefab: {fileID: 4939005982420572028, guid: 48c28773f72579747b5c84306bd911af, type: 3}
