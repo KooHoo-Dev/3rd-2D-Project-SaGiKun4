@@ -9,11 +9,15 @@ public class UserInputManager : MonoBehaviour
     private void Update()
     {
         if(Input.GetMouseButtonDown(0)){
-            MouseInput();
+            UnitSelect();
+        }
+
+        if(Input.GetMouseButtonDown(1)){
+            SwitchPosition();
         }
     }
 
-    private void MouseInput()
+    private void UnitSelect()
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
@@ -24,5 +28,16 @@ public class UserInputManager : MonoBehaviour
             UnitSpawner.Instance.SelectUnit(hit.transform.GetComponentInChildren<Unit>());
         else
             UnitSpawner.Instance.DeSelectUnit();
+    }
+
+    private void SwitchPosition()
+    {
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        RaycastHit2D hit; 
+        hit = Physics2D.Raycast(mousePosition, Vector3.forward, 100f, unitPositionMask);
+        
+        if(hit.collider != null)
+            UnitSpawner.Instance.SwitchPosition(hit.transform);
     }
 }

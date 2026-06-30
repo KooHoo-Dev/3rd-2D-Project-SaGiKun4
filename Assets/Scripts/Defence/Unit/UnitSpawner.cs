@@ -43,7 +43,7 @@ public class UnitSpawner : MonoBehaviour
         if(unit == null) return;
 
         if(currentUnit != null) DeSelectUnit();
-        
+
         currentUnit = unit;
         detectedArea = currentUnit.GetComponentInChildren<SpriteRenderer>();
         detectedArea.enabled = true;
@@ -54,5 +54,21 @@ public class UnitSpawner : MonoBehaviour
         if(currentUnit == null) return;
         currentUnit = null;
         detectedArea.enabled = false;
+    }
+
+    public void SwitchPosition(Transform position)
+    {
+        if(currentUnit == null) return;
+        Transform unitParent = currentUnit.transform.parent.GetComponent<Transform>();
+        
+        Unit tmpUnit = position.GetComponentInChildren<Unit>();
+        if(tmpUnit != null)
+        {
+            tmpUnit.transform.SetParent(unitParent);
+            tmpUnit.transform.localPosition = new Vector2(0,0);
+        }
+        
+        currentUnit.transform.SetParent(position);
+        currentUnit.transform.localPosition = new Vector2(0,0);
     }
 }
