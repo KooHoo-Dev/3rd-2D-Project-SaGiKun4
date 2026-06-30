@@ -31,6 +31,8 @@ public class PlayerBehaviour : MonoBehaviour
     private bool isAiming = false;
     private Vector2 aimingOffset;
 
+    private float bulletReloadingTime = 1.0f;
+    private bool isReload = true;
     public int damage {get; private set;} = 3;
     public int currentHp {get; private set;} = 90;
     public int maxHp {get; private set;}
@@ -109,18 +111,27 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if (context.performed)
         {
-            if (isAiming)
+            if (isAiming && isReload)
             {
-                Bullet bullet = BulletPool.Instance.Get();
-
-                bullet.transform.position = transform.position;
-                bullet.Initialize(Bullet.BulletOwner.Player, playerBulletSprite, damage, aimingOffset.normalized, rotationOffset);
+                StartCoroutine(Shoot());
             }
-            else
+            else if(!isAiming)
             {
                 childAnimator.SetTrigger("Attack");
             }
         }
+    }
+
+    private IEnumerator Shoot()
+    {
+        isReload = false;
+        Bullet bullet = BulletPool.Instance.Get();
+
+        bullet.transform.position = transform.position;
+        bullet.Initialize(Bullet.BulletOwner.Player, playerBulletSprite, damage, aimingOffset.normalized, rotationOffset);
+
+        yield return new WaitForSeconds(bulletReloadingTime);
+        isReload = true;
     }
 
     public void OnAimStarted(InputAction.CallbackContext context)
