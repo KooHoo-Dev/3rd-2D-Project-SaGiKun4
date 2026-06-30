@@ -6,6 +6,8 @@ public class UnitSpawner : MonoBehaviour
     [SerializeField] private Transform[] slots;
 
     private Unit[] units;
+    private Unit currentUnit = null;
+    private SpriteRenderer detectedArea;
 
     private void Awake()
     {
@@ -31,8 +33,26 @@ public class UnitSpawner : MonoBehaviour
         if (slotIndex == -1)
             return;
 
-        Unit unit = Instantiate(prefab,slots[slotIndex].position,Quaternion.identity);
+        Unit unit = Instantiate(prefab, slots[slotIndex].transform);
 
         units[slotIndex] = unit;
+    }
+
+    public void SelectUnit(Unit unit)
+    {
+        if(unit == null) return;
+
+        if(currentUnit != null) DeSelectUnit();
+        
+        currentUnit = unit;
+        detectedArea = currentUnit.GetComponentInChildren<SpriteRenderer>();
+        detectedArea.enabled = true;
+    }
+
+    public void DeSelectUnit()
+    {
+        if(currentUnit == null) return;
+        currentUnit = null;
+        detectedArea.enabled = false;
     }
 }
