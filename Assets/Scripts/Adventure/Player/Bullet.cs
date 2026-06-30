@@ -2,15 +2,34 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public enum BulletOwner
+    {
+        Player,
+        Monster
+    }
+
     [SerializeField] private float speed = 10f;
 
+    private BulletOwner owner;
+    private SpriteRenderer spriteRenderer;
     private Vector2 direction;
     private int damage;
 
-    public void Fire(Vector2 direction, int damage)
+    private void Awake()
     {
-        this.direction = direction.normalized;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    public void Initialize(BulletOwner owner, Sprite sprite, int damage, Vector2 direction, float rotationOffset)
+    {
+        this.owner = owner;
         this.damage = damage;
+        this.direction = direction.normalized;
+
+        spriteRenderer.sprite = sprite;
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, angle + rotationOffset);
     }
 
     private void Update()
@@ -22,7 +41,8 @@ public class Bullet : MonoBehaviour
     {
         if (collision.CompareTag("Mob"))
         {
-            Debug.Log("몹 맞음");
+            BirdMovement bird = collision.GetComponent<BirdMovement>();
+            bird.TakeDamage(damage);
             gameObject.SetActive(false);
         }
     }

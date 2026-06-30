@@ -15457,6 +15457,51 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17b1ab29f037ed440aa481a1fc8cd4d9, type: 3}
+--- !u!1 &1621927116
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1621927117}
+  - component: {fileID: 1621927118}
+  m_Layer: 0
+  m_Name: BulletPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1621927117
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1621927116}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1621927118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1621927116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2a70fdc31965cd44b5588175ae500ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BulletPool
+  bulletPrefab: {fileID: -753607727505180842, guid: 89aacaf89cc58b64aaac3d2d165ac7c0, type: 3}
 --- !u!1 &1641660625
 GameObject:
   m_ObjectHideFlags: 0
@@ -16812,6 +16857,8 @@ MonoBehaviour:
     m_Bits: 64
   followCamera: {fileID: 330585548}
   hitEffect: {fileID: 1070652555}
+  playerBulletSprite: {fileID: 21300000, guid: a881a1a338fac9a488a022f0f494fd60, type: 3}
+  rotationOffset: 150
 --- !u!50 &1877966499
 Rigidbody2D:
   serializedVersion: 5
@@ -19108,3 +19155,4 @@ SceneRoots:
   - {fileID: 4516426}
   - {fileID: 1126816044}
   - {fileID: 1977521573}
+  - {fileID: 1621927117}

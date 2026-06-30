@@ -26,8 +26,8 @@ public class PlayerBehaviour : MonoBehaviour
     private Vector3 originalScale;
     private bool canDamaged = true;
 
-    [SerializeField] private Bullet bulletPrefab;
-    [SerializeField] private Transform firePoint;
+    [SerializeField] private Sprite playerBulletSprite;
+    [SerializeField] private float rotationOffset;
     private bool isAiming = false;
     private Vector2 aimingOffset;
 
@@ -111,8 +111,10 @@ public class PlayerBehaviour : MonoBehaviour
         {
             if (isAiming)
             {
-                Bullet bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-                bullet.Fire(aimingOffset.normalized, damage);
+                Bullet bullet = BulletPool.Instance.Get();
+
+                bullet.transform.position = transform.position;
+                bullet.Initialize(Bullet.BulletOwner.Player, playerBulletSprite, damage, aimingOffset.normalized, rotationOffset);
             }
             else
             {
@@ -126,7 +128,6 @@ public class PlayerBehaviour : MonoBehaviour
         if (context.started)
         {
             isAiming = true;
-            Debug.Log("Aim Start");
         }
     }
 
