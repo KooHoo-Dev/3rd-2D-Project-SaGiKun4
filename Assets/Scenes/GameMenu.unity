@@ -3551,7 +3551,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMenuMovement
   player: {fileID: 1666704976}
-  text: {fileID: 0}
 --- !u!114 &1666704975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3564,6 +3563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44761587928727f479807b0ba328bf17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteract
+  text: {fileID: 1150687026}
 --- !u!50 &1666704976
 Rigidbody2D:
   serializedVersion: 5

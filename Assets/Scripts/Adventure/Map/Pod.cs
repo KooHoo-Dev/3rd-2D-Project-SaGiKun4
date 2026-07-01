@@ -1,35 +1,10 @@
-using Study.Utilities;
 using UnityEngine;
-using UnityEngine.InputSystem;
-
-public class Pod : MonoBehaviour
+public class Pod : InteractionPoint
 {
-    private bool inExitZone = false;
+    public override string InteractionText { get; } = "AdventureExit";
 
-    private void Update()
+    public override void Execute()
     {
-        if (inExitZone)
-        {
-            if(SimpleInput.GetKey(Key.Space))
-            {
-                AdventureManager.Instance.QuitAdventure();
-            }
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            inExitZone = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            inExitZone = false;
-        }
+        AdventureManager.Instance.QuitAdventure();
     }
 }

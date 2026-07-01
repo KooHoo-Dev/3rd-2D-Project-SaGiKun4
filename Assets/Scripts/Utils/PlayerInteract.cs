@@ -1,15 +1,18 @@
 using Study.Utilities;
-using UnityEngine.InputSystem;
+using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerInteract : MonoBehaviour
 {
     private InteractionPoint currentPoint;
+    [SerializeField] private TMP_Text text;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Point"))
         {
             currentPoint = collision.GetComponent<InteractionPoint>();
+            text.SetText(currentPoint.InteractionText);
         }
     }
 
@@ -18,6 +21,7 @@ public class PlayerInteract : MonoBehaviour
         if (collision.CompareTag("Point"))
         {
             currentPoint = null;
+            text.SetText("");
         }
     }
 
