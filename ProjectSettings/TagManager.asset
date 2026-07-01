@@ -9,6 +9,7 @@ TagManager:
   - Mob
   - Point
   - Item
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -16,7 +17,7 @@ TagManager:
   - Wall
   - Water
   - UI
-  - CameraMask
+  - 
   - UnitMask
   - 
   - 
