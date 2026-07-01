@@ -153,9 +153,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bullet
   speed: 10
-  wallLayer:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!50 &6049546029785886285
 Rigidbody2D:
   serializedVersion: 5

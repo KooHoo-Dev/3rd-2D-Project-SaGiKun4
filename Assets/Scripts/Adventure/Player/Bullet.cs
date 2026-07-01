@@ -13,7 +13,6 @@ public class Bullet : MonoBehaviour
     private BulletOwner owner;
     private SpriteRenderer spriteRenderer;
     private Vector2 direction;
-    [SerializeField] private LayerMask wallLayer;
     private int damage;
 
     private void Awake()

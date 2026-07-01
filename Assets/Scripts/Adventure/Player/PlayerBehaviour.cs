@@ -130,7 +130,9 @@ public class PlayerBehaviour : MonoBehaviour
         Bullet bullet = BulletPool.Instance.Get();
 
         bullet.transform.position = transform.position;
-        bullet.Initialize(Bullet.BulletOwner.Player, playerBulletSprite, damage, aimingOffset.normalized, rotationOffset);
+        bullet.Initialize(Bullet.BulletOwner.Player, playerBulletSprite,
+        Mathf.FloorToInt((damage / 2) + PlayerDataManager.Instance.Power),
+        aimingOffset.normalized, rotationOffset);
 
         yield return new WaitForSeconds(bulletReloadingTime);
         isReload = true;
