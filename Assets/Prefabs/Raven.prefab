@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7150238995747859345}
   - component: {fileID: 7827490406013575632}
   - component: {fileID: 2467618145505899995}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Raven
   m_TagString: Mob
   m_Icon: {fileID: 0}
@@ -5072,7 +5072,7 @@ GameObject:
   - component: {fileID: 651951766180805501}
   - component: {fileID: 6715507448906539836}
   - component: {fileID: 2513494135217803371}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: detect
   m_TagString: Untagged
   m_Icon: {fileID: 0}

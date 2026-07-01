@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6405143463411039714}
   - component: {fileID: 9150718498153815905}
   - component: {fileID: 1696725489753173353}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Sparrow
   m_TagString: Mob
   m_Icon: {fileID: 0}
@@ -31,8 +31,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 552363259819260684}
   - {fileID: 8645186509245849038}
@@ -131,10 +131,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a57d4d040d5d64d4eb723b00ad80c8e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FishMovement
-  myBirdType: 1
-  pathFinder: {fileID: 0}
-  gridManager: {fileID: 0}
+  <myBirdType>k__BackingField: 0
   hitEffect: {fileID: 1818274967939641721}
+  gridManager: {fileID: 0}
   moveArea: {fileID: 0}
   currentState: 1
   birdData: {fileID: 11400000, guid: 5351882dfdb327644925e90cb4a6a295, type: 2}
@@ -5060,7 +5059,7 @@ GameObject:
   - component: {fileID: 552363259819260684}
   - component: {fileID: 682964335124364036}
   - component: {fileID: 7619059303817906353}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: detect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5126,7 +5125,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 10, y: 10}
+  m_Size: {x: 25, y: 25}
   m_EdgeRadius: 0
 --- !u!114 &7619059303817906353
 MonoBehaviour:

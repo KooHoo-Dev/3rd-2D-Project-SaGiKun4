@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Pigeon
   m_EditorClassIdentifier: Assembly-CSharp::BirdData
   hp: 10
-  damage: 0
+  damage: 5
   defaultSpeed: 2
   runSpeed: 3
-  birdType: 0
+  birdType: 1
   dropItem: {fileID: 11400000, guid: 7cd724aa13175d243b4c11d847708452, type: 2}

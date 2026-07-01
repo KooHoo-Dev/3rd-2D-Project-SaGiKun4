@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3744374517082763593}
   - component: {fileID: 2646707698728584274}
   - component: {fileID: 717415439786154372}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: detect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 7041763708367751234}
   - component: {fileID: 5313313947864404295}
   - component: {fileID: 4751946057122324711}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Pigeon
   m_TagString: Mob
   m_Icon: {fileID: 0}
@@ -222,8 +222,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a57d4d040d5d64d4eb723b00ad80c8e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FishMovement
-  myBirdType: 1
+  <myBirdType>k__BackingField: 0
   hitEffect: {fileID: 5431243833621770734}
+  gridManager: {fileID: 0}
   moveArea: {fileID: 0}
   currentState: 1
   birdData: {fileID: 11400000, guid: cb96281aa0206ae47b9dd34bbfeec569, type: 2}
