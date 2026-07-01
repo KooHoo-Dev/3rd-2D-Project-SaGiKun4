@@ -12,6 +12,8 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] private Animator childAnimator;
     [SerializeField] private SimpleFollowCamera followCamera;
 
+    private bool isRunning = false;
+
     private Rigidbody2D rigid;
 
     [SerializeField] public ParticleSystem hitEffect;
@@ -32,11 +34,13 @@ public class PlayerBehaviour : MonoBehaviour
 
     private float bulletReloadingTime = 1.0f;
     private bool isReload = true;
-    public int damage {get; private set;} = 111113;
-    public int currentHp {get; private set;} = 90;
-    public int maxHp {get; private set;}
+    public int damage { get; private set; } = 111113;
+    public int currentHp { get; private set; } = 90;
+    public int maxHp { get; private set; }
 
+    [SerializeField] private Transform heightStandard;
     public float maxHeight { get; private set; } = 80f;
+    private float hpTimer;
 
     private void Awake()
     {
@@ -45,7 +49,7 @@ public class PlayerBehaviour : MonoBehaviour
         inputActions = new PlayerInput();
 
         originalScale = transform.localScale;
-        
+
         InitializeStat();
 
         PlayerUIController.Instance.UpdateHealthUI();
@@ -56,7 +60,7 @@ public class PlayerBehaviour : MonoBehaviour
         canDamaged = true;
 
         damage = damage + (7 * PlayerDataManager.Instance.Power);
-        maxHp = currentHp + (25  * PlayerDataManager.Instance.Health);
+        maxHp = currentHp + (25 * PlayerDataManager.Instance.Health);
         currentHp = maxHp;
     }
 
@@ -93,6 +97,13 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Update()
     {
+        if (currentHp <= 0)
+        {
+            AdventureManager.Instance.FailAdventure();
+        }
+
+        UpdateHp();
+
         input = inputActions.PlayerMove.Move.ReadValue<Vector2>();
 
         if (input.x != 0)
@@ -100,9 +111,18 @@ public class PlayerBehaviour : MonoBehaviour
             lookDir = Mathf.Sign(input.x);
         }
 
-        if(SimpleInput.GetKeyDown(Key.LeftShift)) {moveSpeed = 5f;}
-        if(SimpleInput.GetKeyUp(Key.LeftShift)) {moveSpeed = 3f;}
-        
+        if (SimpleInput.GetKeyDown(Key.LeftShift))
+        {
+            moveSpeed = 5f;
+            isRunning = true;
+        }
+
+        if (SimpleInput.GetKeyUp(Key.LeftShift))
+        {
+            moveSpeed = 3f;
+            isRunning = false;
+        }
+
         transform.localScale = new Vector3(originalScale.x * lookDir, originalScale.y, originalScale.z);
 
         if (isAiming)
@@ -119,7 +139,7 @@ public class PlayerBehaviour : MonoBehaviour
             {
                 StartCoroutine(Shoot());
             }
-            else if(!isAiming)
+            else if (!isAiming)
             {
                 childAnimator.SetTrigger("Attack");
             }
@@ -184,7 +204,7 @@ public class PlayerBehaviour : MonoBehaviour
             {
                 UnlockManager.Instance.Unlock(dropItem.Item);
             }
-        }   
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -193,7 +213,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             if (collision.TryGetComponent(out BirdMovement bird))
             {
-                if(bird.myBirdType == BirdMovement.BirdType.Aggressive)
+                if (bird.myBirdType == BirdMovement.BirdType.Aggressive)
                     StartCoroutine(DamageProcess(bird.myDamage));
             }
         }
@@ -205,7 +225,6 @@ public class PlayerBehaviour : MonoBehaviour
         {
             canDamaged = false;
             TakeDamage(damage);
-            IsDead();
             PlayerUIController.Instance.UpdateHealthUI();
             yield return new WaitForSeconds(1f);
             canDamaged = true;
@@ -219,11 +238,30 @@ public class PlayerBehaviour : MonoBehaviour
         hitEffect.Play();
     }
 
-    private void IsDead()
+    private void UpdateHp()
     {
-        if(currentHp <= 0)
+        float height = transform.position.y - heightStandard.position.y;
+
+        float drainPerSecond = 1f / 3f;
+
+        if (isRunning)
         {
-            AdventureManager.Instance.FailAdventure();
+            drainPerSecond = 1f;
+        }
+
+        if (height >= maxHeight)
+        {
+            drainPerSecond = 2f;
+        }
+
+        hpTimer += Time.deltaTime * drainPerSecond;
+
+        if (hpTimer >= 1f)
+        {
+            hpTimer -= 1f;
+
+            currentHp = Mathf.Max(currentHp - 1, 0);
+            PlayerUIController.Instance.UpdateHealthUI();
         }
     }
 }
