@@ -55,6 +55,8 @@ public class Unit : MonoBehaviour
 
         attackBehaviour = item.attackData;
 
+        InventoryManager.Instance.Inventory.RemoveItem(EquippedItem);
+
         Debug.Log($"{name} 아이템 장착: {item.Name}");
     }
 
