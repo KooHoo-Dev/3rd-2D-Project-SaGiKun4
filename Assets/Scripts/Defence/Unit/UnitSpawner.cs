@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class UnitSpawner : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class UnitSpawner : MonoBehaviour
     private Unit[] units;
     private Unit currentUnit = null;
     private SpriteRenderer detectedArea;
+    private float speed = 15f;
 
     private void Awake()
     {
@@ -65,10 +67,24 @@ public class UnitSpawner : MonoBehaviour
         if(tmpUnit != null)
         {
             tmpUnit.transform.SetParent(unitParent);
-            tmpUnit.transform.localPosition = new Vector2(0,0);
+            StartCoroutine(MovePositionCoroutine(tmpUnit.transform));
+            
         }
         
         currentUnit.transform.SetParent(position);
-        currentUnit.transform.localPosition = new Vector2(0,0);
+        StartCoroutine(MovePositionCoroutine(currentUnit.transform));
+        
+    }
+
+    private IEnumerator MovePositionCoroutine(Transform target)
+    {
+        while (Vector3.Distance(target.localPosition, Vector3.zero) > 0.01f)
+        {
+            target.localPosition = Vector3.MoveTowards(target.localPosition, Vector3.zero, speed * Time.deltaTime);
+
+            yield return null;
+        }
+
+        target.localPosition = Vector3.zero;
     }
 }
