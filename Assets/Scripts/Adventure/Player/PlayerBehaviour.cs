@@ -7,10 +7,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerBehaviour : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float accel = 5f;
     [SerializeField] private Animator childAnimator;
-    [SerializeField] private LayerMask cameraMaskLayer;
     [SerializeField] private SimpleFollowCamera followCamera;
 
     private Rigidbody2D rigid;
@@ -98,6 +97,9 @@ public class PlayerBehaviour : MonoBehaviour
         {
             lookDir = Mathf.Sign(input.x);
         }
+
+        if(SimpleInput.GetKeyDown(Key.LeftShift)) {moveSpeed = 5f;}
+        if(SimpleInput.GetKeyUp(Key.LeftShift)) {moveSpeed = 3f;}
         
         transform.localScale = new Vector3(originalScale.x * lookDir, originalScale.y, originalScale.z);
 
@@ -198,14 +200,19 @@ public class PlayerBehaviour : MonoBehaviour
         if (canDamaged)
         {
             canDamaged = false;
-            currentHp -= damage;
+            TakeDamage(damage);
             IsDead();
             PlayerUIController.Instance.UpdateHealthUI();
-            hitEffect.gameObject.SetActive(false);
-            hitEffect.gameObject.SetActive(true);
             yield return new WaitForSeconds(1f);
             canDamaged = true;
         }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        currentHp -= damage;
+        hitEffect.gameObject.SetActive(true);
+        hitEffect.Play();
     }
 
     private void IsDead()
