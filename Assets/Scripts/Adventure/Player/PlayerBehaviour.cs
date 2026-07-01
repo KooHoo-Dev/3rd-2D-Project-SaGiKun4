@@ -32,9 +32,11 @@ public class PlayerBehaviour : MonoBehaviour
 
     private float bulletReloadingTime = 1.0f;
     private bool isReload = true;
-    public int damage {get; private set;} = 3;
+    public int damage {get; private set;} = 111113;
     public int currentHp {get; private set;} = 90;
     public int maxHp {get; private set;}
+
+    public float maxHeight { get; private set; } = 80f;
 
     private void Awake()
     {
