@@ -31,6 +31,10 @@ public class ContentController : MonoBehaviour
             {
                 slots[i].gameObject.SetActive(false);
             }
+            else 
+            {
+                slots[i].gameObject.SetActive(true);
+            }
         }
     }
 }
