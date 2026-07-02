@@ -252,7 +252,7 @@ public class BirdMovement : MonoBehaviour
             return;
         }
 
-        foreach (var skill in skills)
+        foreach (BirdSkill skill in skills)
         {
             if (skill.CanUse(this))
             {

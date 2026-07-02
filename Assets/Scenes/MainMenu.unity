@@ -2457,7 +2457,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2113567608}
-  - component: {fileID: 2113567607}
   - component: {fileID: 2113567606}
   m_Layer: 0
   m_Name: SceneManager
@@ -2481,18 +2480,6 @@ MonoBehaviour:
   fadeImage: {fileID: 916896868}
   fadeCanvas: {fileID: 204293613}
   fadeDuration: 0.3
---- !u!114 &2113567607
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2113567605}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e7a5db8ec5544b4baade433b534cd5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FadeManager
 --- !u!4 &2113567608
 Transform:
   m_ObjectHideFlags: 0
