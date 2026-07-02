@@ -25,7 +25,8 @@ public abstract class Item : ScriptableObject
     public Sprite BirdSprite;
     public ItemTier Tier;
     public UnitAttack attackData;
-
+    public AnimatorOverrideController overrideController;
+    public Vector3 detectedArea;
     public abstract bool CanBuy();
     public abstract void Buy();
 }
