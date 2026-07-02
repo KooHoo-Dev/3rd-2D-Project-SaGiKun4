@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4983121475417027165}
   - component: {fileID: 4978800364507673699}
   - component: {fileID: 547875714779963515}
+  - component: {fileID: 2560831517306805043}
   m_Layer: 0
   m_Name: UnitVisual
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5629377094805232984}
@@ -102,7 +103,7 @@ Animator:
   m_GameObject: {fileID: 1304393972832001922}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1efdf417f3236e14c8f8fd7718f649d2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -114,6 +115,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2560831517306805043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1304393972832001922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87b20d32f8785d94f8c737b68d63cd42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimatorAttack
 --- !u!1 &5358568715796126300
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,11 +175,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Unit
   attackSpeed: 1
-  defaultDetectedArea: {x: 0, y: 0, z: 0}
-  detectedArea: {x: 0, y: 0, z: 0}
-  defaultAttackBehaviour: {fileID: 11400000, guid: b42ad3be8f6dd3140a499b0ab1567091, type: 2}
-  attackBehaviour: {fileID: 0}
+  <detectedArea>k__BackingField: {x: 4.7, y: 4.7, z: 4.7}
+  <detectedAreaSprite>k__BackingField: {fileID: 263947863695978126}
+  <defaultAttackBehaviour>k__BackingField: {fileID: 11400000, guid: b42ad3be8f6dd3140a499b0ab1567091, type: 2}
+  <attackBehaviour>k__BackingField: {fileID: 0}
   sprite: {fileID: 4978800364507673699}
+  animator: {fileID: 0}
 --- !u!61 &7848929184163236707
 BoxCollider2D:
   m_ObjectHideFlags: 0
