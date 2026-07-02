@@ -9,7 +9,6 @@ public class TargetAttack : UnitAttack
         if (monsters.Count == 0)
             return;
 
-        Debug.Log(monsters[0].name+"를 공격");
         monsters[0].TakeDamage(unit.damage);
     }
 }
