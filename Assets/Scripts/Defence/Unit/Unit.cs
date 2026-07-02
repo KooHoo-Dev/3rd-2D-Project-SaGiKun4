@@ -10,7 +10,7 @@ public class Unit : MonoBehaviour
     [SerializeField] private UnitAttack attackBehaviour;
     
     public List<MobState> mobs {get; private set;} = new();
-    private SpriteRenderer sprite;
+    [SerializeField] private SpriteRenderer sprite;
     private Sprite defaultSprite;
 
     private float attackTimer;
@@ -22,7 +22,6 @@ public class Unit : MonoBehaviour
 
     private void OnEnable()
     {
-        sprite = GetComponentInChildren<SpriteRenderer>();
         defaultSprite = sprite.sprite;
         attackBehaviour = defaultAttackBehaviour;
         attackTimer = attackSpeed;
