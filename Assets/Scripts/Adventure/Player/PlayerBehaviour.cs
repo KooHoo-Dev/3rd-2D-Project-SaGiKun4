@@ -36,12 +36,12 @@ public class PlayerBehaviour : MonoBehaviour
 
     private float bulletReloadingTime = 1.0f;
     private bool isReload = true;
-    public int damage { get; private set; } = 311111;
+    public int damage { get; private set; } = 3;
     public int currentHp { get; private set; } = 90;
     public int maxHp { get; private set; }
 
     [SerializeField] private Transform heightStandard;
-    public float maxHeight { get; private set; } = 180f;
+    public float maxHeight { get; private set; } = 80f;
     private float hpTimer;
 
     private void Awake()
