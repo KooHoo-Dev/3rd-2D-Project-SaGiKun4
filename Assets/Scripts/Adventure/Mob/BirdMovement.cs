@@ -109,7 +109,20 @@ public class BirdMovement : MonoBehaviour
             return;
 
         if (currentState == State.None)
+        {
+            if (Vector3.Distance(transform.position, PlayerBehaviour.Instance.transform.position) < 25f)
+            {
+                ChangeState(State.Idle);
+            }
+
             return;
+        }
+
+        if (Vector3.Distance(transform.position, PlayerBehaviour.Instance.transform.position) >= 25f)
+        {
+            ChangeState(State.None);
+            return;
+        }
 
         if (Player != null && CanSeePlayer())
         {
@@ -153,6 +166,7 @@ public class BirdMovement : MonoBehaviour
         switch (currentState)
         {
             case State.None:
+                Rigidbody2D.linearVelocity = Vector2.zero;
                 break;
 
             case State.Idle:
