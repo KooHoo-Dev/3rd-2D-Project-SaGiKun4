@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Study.Utilities;
 
 public class UnitSpawner : MonoBehaviour
 {
@@ -7,8 +8,8 @@ public class UnitSpawner : MonoBehaviour
     [SerializeField] private Transform[] slots;
 
     private Unit[] units;
-    private Unit currentUnit = null;
-    private SpriteRenderer detectedArea;
+    public Unit currentUnit = null;
+    private SpriteRenderer detectedAreaSprite;
     private float speed = 15f;
 
     private void Awake()
@@ -47,15 +48,15 @@ public class UnitSpawner : MonoBehaviour
         if(currentUnit != null) DeSelectUnit();
 
         currentUnit = unit;
-        detectedArea = currentUnit.GetComponentInChildren<SpriteRenderer>();
-        detectedArea.enabled = true;
+        detectedAreaSprite = currentUnit.detectedAreaSprite;
+        detectedAreaSprite.enabled = true;
     }
 
     public void DeSelectUnit()
     {
         if(currentUnit == null) return;
         currentUnit = null;
-        detectedArea.enabled = false;
+        detectedAreaSprite.enabled = false;
     }
 
     public void SwitchPosition(Transform position)
@@ -68,7 +69,6 @@ public class UnitSpawner : MonoBehaviour
         {
             tmpUnit.transform.SetParent(unitParent);
             StartCoroutine(MovePositionCoroutine(tmpUnit.transform));
-            
         }
         
         currentUnit.transform.SetParent(position);
