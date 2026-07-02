@@ -22,6 +22,7 @@ public abstract class Item : ScriptableObject
     public string Name; // 아이템의 명칭
     public int price;
     public Sprite Icon; // 아이템의 Sprite 아이콘
+    public Sprite BirdSprite;
     public ItemTier Tier;
     public UnitAttack attackData;
 

@@ -10,7 +10,8 @@ public class Unit : MonoBehaviour
     [SerializeField] private UnitAttack attackBehaviour;
     
     public List<MobState> mobs {get; private set;} = new();
-    private Transform spriteFlipper;
+    private SpriteRenderer sprite;
+    private Sprite defaultSprite;
 
     private float attackTimer;
 
@@ -21,7 +22,8 @@ public class Unit : MonoBehaviour
 
     private void OnEnable()
     {
-        spriteFlipper = GetComponent<Transform>();
+        sprite = GetComponentInChildren<SpriteRenderer>();
+        defaultSprite = sprite.sprite;
         attackBehaviour = defaultAttackBehaviour;
         attackTimer = attackSpeed;
     }
@@ -43,9 +45,9 @@ public class Unit : MonoBehaviour
             Vector3 targetPos = mobs[0].transform.position;
             float sign = Mathf.Sign(targetPos.x - transform.position.x);
 
-            sign = sign == Mathf.Sign(spriteFlipper.localScale.x) ? 1 : -1;
+            sign = sign == Mathf.Sign(sprite.transform.localScale.x) ? 1 : -1;
 
-            spriteFlipper.localScale = new Vector3(sign * spriteFlipper.localScale.x, spriteFlipper.localScale.y, spriteFlipper.localScale.z);
+            sprite.transform.localScale = new Vector3(sign * sprite.transform.localScale.x, sprite.transform.localScale.y, sprite.transform.localScale.z);
         }
     }
 
@@ -57,6 +59,7 @@ public class Unit : MonoBehaviour
         HasItem = true;
 
         attackBehaviour = item.attackData;
+        sprite.sprite = item.BirdSprite;
 
         InventoryManager.Instance.Inventory.RemoveItem(EquippedItem);
 
@@ -72,6 +75,7 @@ public class Unit : MonoBehaviour
 
         HasItem = false;
         EquippedItem = null;
+        sprite.sprite = defaultSprite;
 
         attackBehaviour = defaultAttackBehaviour;
     }

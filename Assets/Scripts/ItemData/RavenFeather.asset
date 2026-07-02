@@ -16,5 +16,6 @@ MonoBehaviour:
   Name: "\uAE4C\uB9C8\uADC0 \uAE43\uD138"
   price: 4
   Icon: {fileID: 21300000, guid: ba7f3539ea493a94cae3c4c39bb47869, type: 3}
+  BirdSprite: {fileID: -383788178, guid: 18f15cc005cbc0f4fa97852513a13215, type: 3}
   Tier: 1
   attackData: {fileID: 11400000, guid: b783429e5f8eff64a9b23659bd3c8815, type: 2}
