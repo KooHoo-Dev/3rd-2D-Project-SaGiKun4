@@ -8,7 +8,6 @@ public class PlayerUIController : MonoBehaviour
     public static PlayerUIController Instance;
     [SerializeField] private Image HPBar;
     [SerializeField] private TMP_Text HPText;
-    [SerializeField] private PlayerBehaviour player;
 
     [SerializeField] private TMP_Text heightText;
     [SerializeField] private Transform heightStandard;
@@ -36,19 +35,19 @@ public class PlayerUIController : MonoBehaviour
 
     public void UpdateHealthUI()
     {
-        HPBar.fillAmount = (float)player.currentHp / (float)player.maxHp;
-        HPText.SetText($"{player.currentHp}");
+        HPBar.fillAmount = (float)PlayerBehaviour.Instance.currentHp / (float)PlayerBehaviour.Instance.maxHp;
+        HPText.SetText($"{PlayerBehaviour.Instance.currentHp}");
     }
 
     private void UpdateHeightUI()
     {
-        float height = player.transform.position.y - heightStandard.position.y;
+        float height = PlayerBehaviour.Instance.transform.position.y - heightStandard.position.y;
 
-        float warningHeight = player.maxHeight - 30f;
+        float warningHeight = PlayerBehaviour.Instance.maxHeight - 30f;
 
         heightText.SetText($"{height:F1} m");
 
-        float ratio = Mathf.InverseLerp(warningHeight, player.maxHeight, height);
+        float ratio = Mathf.InverseLerp(warningHeight, PlayerBehaviour.Instance.maxHeight, height);
 
         if (ratio < 1f)
         {

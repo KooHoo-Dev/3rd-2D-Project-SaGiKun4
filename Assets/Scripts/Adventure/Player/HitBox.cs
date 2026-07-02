@@ -19,7 +19,7 @@ public class HitBox : MonoBehaviour
 
             checkList.Add(bird);
 
-            bird.TakeDamage(player.damage);
+            bird.TakeDamage(PlayerBehaviour.Instance.damage);
         }
     }
 
