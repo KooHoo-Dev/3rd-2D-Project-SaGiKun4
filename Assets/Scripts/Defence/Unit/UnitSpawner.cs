@@ -78,6 +78,9 @@ public class UnitSpawner : MonoBehaviour
 
     private IEnumerator MovePositionCoroutine(Transform target)
     {
+        Unit targetUnit = target.GetComponent<Unit>();
+        targetUnit.isMove = true;
+
         while (Vector3.Distance(target.localPosition, Vector3.zero) > 0.01f)
         {
             target.localPosition = Vector3.MoveTowards(target.localPosition, Vector3.zero, speed * Time.deltaTime);
@@ -86,5 +89,6 @@ public class UnitSpawner : MonoBehaviour
         }
 
         target.localPosition = Vector3.zero;
+        targetUnit.isMove = false;
     }
 }

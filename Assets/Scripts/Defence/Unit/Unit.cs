@@ -4,7 +4,8 @@ using UnityEngine;
 public class Unit : MonoBehaviour
 {
     [SerializeField] private float attackSpeed;
-    [SerializeField] private DetectedArea detectedArea;
+    [SerializeField] private Vector3 defaultDetectedArea;
+    [SerializeField] private Vector3 detectedArea;
     [SerializeField] private UnitAttack defaultAttackBehaviour;
     [SerializeField] private UnitAttack attackBehaviour;
     
@@ -16,6 +17,7 @@ public class Unit : MonoBehaviour
     public bool HasItem { get; private set; }
     public Item EquippedItem { get; private set; }
     public int damage {get; private set;} = 10;
+    public bool isMove {get; set;} = false;
 
     private void OnEnable()
     {
@@ -31,8 +33,9 @@ public class Unit : MonoBehaviour
         if (attackTimer >= attackSpeed)
         {
             attackTimer = 0;
-
-            attackBehaviour.Attack(this, mobs);
+            
+            if(!isMove)
+                attackBehaviour.Attack(this, mobs);
         }
 
         if(mobs.Count > 0)

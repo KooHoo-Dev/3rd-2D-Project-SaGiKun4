@@ -12,6 +12,8 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] private Animator childAnimator;
     [SerializeField] private SimpleFollowCamera followCamera;
 
+    public static PlayerBehaviour Instance;
+
     private bool isRunning = false;
 
     private Rigidbody2D rigid;
@@ -34,16 +36,24 @@ public class PlayerBehaviour : MonoBehaviour
 
     private float bulletReloadingTime = 1.0f;
     private bool isReload = true;
-    public int damage { get; private set; } = 111113;
+    public int damage { get; private set; } = 311111;
     public int currentHp { get; private set; } = 90;
     public int maxHp { get; private set; }
 
     [SerializeField] private Transform heightStandard;
-    public float maxHeight { get; private set; } = 80f;
+    public float maxHeight { get; private set; } = 180f;
     private float hpTimer;
 
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        
         rigid = GetComponent<Rigidbody2D>();
 
         inputActions = new PlayerInput();
@@ -51,8 +61,6 @@ public class PlayerBehaviour : MonoBehaviour
         originalScale = transform.localScale;
 
         InitializeStat();
-
-        PlayerUIController.Instance.UpdateHealthUI();
     }
 
     private void InitializeStat()
@@ -62,6 +70,8 @@ public class PlayerBehaviour : MonoBehaviour
         damage = damage + (7 * PlayerDataManager.Instance.Power);
         maxHp = currentHp + (25 * PlayerDataManager.Instance.Health);
         currentHp = maxHp;
+
+        PlayerUIController.Instance.UpdateHealthUI();
     }
 
     private void OnEnable()
