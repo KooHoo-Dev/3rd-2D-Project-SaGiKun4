@@ -1,7 +1,6 @@
 using Study.Utilities;
 using UnityEngine.InputSystem;
 using UnityEngine;
-using TMPro;
 
 public class PlayerMenuMovement : MonoBehaviour
 {
