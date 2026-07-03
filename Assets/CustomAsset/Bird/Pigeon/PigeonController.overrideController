@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: PigeonController
+  m_Controller: {fileID: 9100000, guid: 1efdf417f3236e14c8f8fd7718f649d2, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 2e665221f99d6e3419745d119f7aa607, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: f0d572cda6cb6f949b0b69131911e9bd, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 8b857bf8940e0a547b24b9215f000695, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: aae4878113a7cf94bba5a94e9bb86a84, type: 2}

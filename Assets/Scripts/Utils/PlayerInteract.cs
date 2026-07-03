@@ -6,13 +6,13 @@ using UnityEngine.InputSystem;
 public class PlayerInteract : MonoBehaviour
 {
     private InteractionPoint currentPoint;
-    [SerializeField] private TMP_Text text;
+    [SerializeField]private GameObject spaceKey;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Point"))
         {
             currentPoint = collision.GetComponent<InteractionPoint>();
-            text.SetText(currentPoint.InteractionText);
+            spaceKey.SetActive(true);
         }
     }
 
@@ -21,7 +21,7 @@ public class PlayerInteract : MonoBehaviour
         if (collision.CompareTag("Point"))
         {
             currentPoint = null;
-            text.SetText("");
+            spaceKey.SetActive(false);
         }
     }
 

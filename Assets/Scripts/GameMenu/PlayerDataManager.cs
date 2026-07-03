@@ -8,25 +8,25 @@ public class PlayerDataManager : SingletonBase<PlayerDataManager>
     [field: SerializeField] public int Health { get; private set; }
     [field: SerializeField] public int Feather { get; private set; }
     
-    public void TrainPower(int price)
+    public void TrainPower()
     {
-        if (OddMoney(price))
+        if (OddMoney(Power+1))
             Power++;
         else
             Debug.Log("재화 부족, 강화 실패");
     }
 
-    public void TrainHealth(int price)
+    public void TrainHealth()
     {
-        if (OddMoney(price))
+        if (OddMoney(Health+1))
             Health++;
         else
             Debug.Log("재화 부족, 강화 실패");
     }
 
-    public void TrainFeather(int price)
+    public void TrainFeather()
     {
-        if (OddMoney(price))
+        if (OddMoney(Feather+1))
             Feather++;
         else
             Debug.Log("재화 부족, 강화 실패");

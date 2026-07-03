@@ -69,9 +69,9 @@ public class InventoryInput : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         {
             foreach (RaycastHit2D hit in hits)
             {
-                if (hit.collider.CompareTag("Unit"))
+                if (hit.collider.CompareTag("UnitMask"))
                 {
-                    Unit hitUnit = hit.collider.GetComponent<Unit>();
+                    Unit hitUnit = hit.collider.GetComponentInChildren<Unit>();
                     hitUnit.EquipItem(selectedItem);
                     ContentController.Instance.Refresh();
                     Debug.Log("유닛 실행");

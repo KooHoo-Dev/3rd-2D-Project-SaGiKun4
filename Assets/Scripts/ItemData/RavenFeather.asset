@@ -19,3 +19,5 @@ MonoBehaviour:
   BirdSprite: {fileID: -383788178, guid: 18f15cc005cbc0f4fa97852513a13215, type: 3}
   Tier: 1
   attackData: {fileID: 11400000, guid: b783429e5f8eff64a9b23659bd3c8815, type: 2}
+  overrideController: {fileID: 22100000, guid: 4443736aa5aeee542a11eb57652501cb, type: 2}
+  detectedArea: {x: 0, y: 0, z: 0}

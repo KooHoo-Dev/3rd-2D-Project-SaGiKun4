@@ -36,12 +36,12 @@ public class PlayerBehaviour : MonoBehaviour
 
     private float bulletReloadingTime = 1.0f;
     private bool isReload = true;
-    public int damage { get; private set; } = 3;
-    public int currentHp { get; private set; } = 90;
-    public int maxHp { get; private set; }
+    [field:SerializeField] public int damage { get; private set; } = 3;
+    [field:SerializeField] public int currentHp { get; private set; }
+    public int maxHp { get; private set; } = 90;
 
     [SerializeField] private Transform heightStandard;
-    public float maxHeight { get; private set; } = 80f;
+    public float maxHeight { get; private set; } = 40f;
     private float hpTimer;
 
     private void Awake()
@@ -68,7 +68,8 @@ public class PlayerBehaviour : MonoBehaviour
         canDamaged = true;
 
         damage = damage + (7 * PlayerDataManager.Instance.Power);
-        maxHp = currentHp + (25 * PlayerDataManager.Instance.Health);
+        maxHp = maxHp + (25 * PlayerDataManager.Instance.Health);
+        maxHeight = maxHeight + (40 * PlayerDataManager.Instance.Feather);
         currentHp = maxHp;
 
         PlayerUIController.Instance.UpdateHealthUI();
@@ -76,6 +77,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void OnEnable()
     {
+        InitializeStat();
+
         inputActions.Enable();
 
         inputActions.PlayerMove.Attack.performed += OnAttack;

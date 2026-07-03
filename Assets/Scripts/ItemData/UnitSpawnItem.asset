@@ -16,6 +16,9 @@ MonoBehaviour:
   Name: "\uC720\uB2DB \uC18C\uD658"
   price: 1
   Icon: {fileID: 21300000, guid: caa4364501bf22f458f8b0f23adb4e73, type: 3}
+  BirdSprite: {fileID: 21300000, guid: eccf9f7138b5b0f408a73b8e2ed0b974, type: 3}
   Tier: 0
-  attackData: {fileID: 0}
+  attackData: {fileID: 11400000, guid: b42ad3be8f6dd3140a499b0ab1567091, type: 2}
+  overrideController: {fileID: 22100000, guid: a67010dc3294ae04cb207b0a3269c13d, type: 2}
+  detectedArea: {x: 0, y: 0, z: 0}
   unitPrefab: {fileID: 4939005982420572028, guid: 48c28773f72579747b5c84306bd911af, type: 3}
