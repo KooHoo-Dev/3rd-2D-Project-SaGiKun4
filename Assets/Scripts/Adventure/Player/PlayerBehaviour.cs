@@ -11,6 +11,7 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] private float accel = 5f;
     [SerializeField] private Animator childAnimator;
     [SerializeField] private SimpleFollowCamera followCamera;
+    [SerializeField] private Transform spaceUI;
 
     public static PlayerBehaviour Instance;
 
@@ -25,8 +26,9 @@ public class PlayerBehaviour : MonoBehaviour
     private Vector2 input;
 
     // 공격 기능용 방향
-    private float lookDir = 1;
+    [field:SerializeField] public float lookDir { get; private set; } = 1;
     private Vector3 originalScale;
+    private Vector3 originalUIScale;
     private bool canDamaged = true;
 
     [SerializeField] private Sprite playerBulletSprite;
@@ -59,6 +61,7 @@ public class PlayerBehaviour : MonoBehaviour
         inputActions = new PlayerInput();
 
         originalScale = transform.localScale;
+        originalUIScale = spaceUI.localScale;
 
         InitializeStat();
     }
@@ -137,6 +140,7 @@ public class PlayerBehaviour : MonoBehaviour
         }
 
         transform.localScale = new Vector3(originalScale.x * lookDir, originalScale.y, originalScale.z);
+        spaceUI.localScale = new Vector3(originalUIScale.x * lookDir, originalUIScale.y, originalUIScale.z);
 
         if (isAiming)
         {
@@ -151,6 +155,7 @@ public class PlayerBehaviour : MonoBehaviour
             if (isAiming && isReload)
             {
                 StartCoroutine(Shoot());
+                AudioManager.Instance.PlaySfx(AudioManager.Sfx.Wing);
             }
             else if (!isAiming)
             {
@@ -215,7 +220,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             if (collision.TryGetComponent(out DropItem dropItem))
             {
-                UnlockManager.Instance.Unlock(dropItem.Item);
+                AudioManager.Instance.PlaySfx(AudioManager.Sfx.Get);
             }
         }
     }
@@ -238,6 +243,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             canDamaged = false;
             TakeDamage(damage);
+            AudioManager.Instance.PlaySfx(AudioManager.Sfx.Damaged, 1.5f);
             PlayerUIController.Instance.UpdateHealthUI();
             yield return new WaitForSeconds(1f);
             canDamaged = true;

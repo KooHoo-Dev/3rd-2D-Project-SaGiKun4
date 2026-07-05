@@ -15,7 +15,8 @@ public class MonsterSpawner : MonoBehaviour
 
     [SerializeField] private MobState monsterPrefab;
     [SerializeField] private MonsterData[] monsterData;
-    [field:SerializeField] public int maxSpawnCount { get; private set; } = 10;
+    [field: SerializeField] public int defaultSpawnCount { get; private set; } = 10;
+    [field:SerializeField] public int maxSpawnCount { get; private set; }
     [field:SerializeField] public int spawnCount { get; private set; }
     private bool canSpawn = false;
 
@@ -24,6 +25,8 @@ public class MonsterSpawner : MonoBehaviour
     {
         Instance = this;
         monsterPool = new ComponentPool<MobState>(monsterPrefab, transform);
+        
+        maxSpawnCount = defaultSpawnCount + PlayerDataManager.Instance.DefenceLevel;
     }
 
     private void Spawn(MonsterData data, Transform[] roadPointsParent, Vector2 spawnPosition)
@@ -51,6 +54,8 @@ public class MonsterSpawner : MonoBehaviour
 
     private IEnumerator SpawnRoutine()
     {
+        float interval = 50f / maxSpawnCount;
+
         while (canSpawn && spawnCount < maxSpawnCount)
         {
             int index = Random.Range(0, monsterData.Length);
@@ -59,7 +64,7 @@ public class MonsterSpawner : MonoBehaviour
 
             spawnCount++;
 
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(Mathf.Min(interval, 2f));
         }
     }
 }

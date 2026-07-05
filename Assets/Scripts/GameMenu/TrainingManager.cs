@@ -30,18 +30,21 @@ public class TrainingManager : MonoBehaviour
     public void TrainPower()
     {
         PlayerDataManager.Instance.TrainPower();
+        currentType = TrainType.None;
         UpdateUI();
     }
 
     public void TrainHealth()
     {
         PlayerDataManager.Instance.TrainHealth();
+        currentType = TrainType.None;
         UpdateUI();
     }
 
     public void TrainFeather()
     {
         PlayerDataManager.Instance.TrainFeather();
+        currentType = TrainType.None;
         UpdateUI();
     }
 
@@ -61,6 +64,8 @@ public class TrainingManager : MonoBehaviour
                 TrainFeather();
                 break;
         }
+        UpdateUI();
+        AudioManager.Instance.PlaySfx(AudioManager.Sfx.Buy);
     }
 
     public void SelectTrain(int type)
@@ -82,13 +87,43 @@ public class TrainingManager : MonoBehaviour
     public void UpdateUI()
     {
         moneyUI.text = $"남은 금액 : {PlayerDataManager.Instance.Money}";
-        bodyText.text = $"현재 +{PlayerDataManager.Instance.Health} : {90 + (25 * PlayerDataManager.Instance.Health)}\n" + 
-                        $"다음 레벨 +{PlayerDataManager.Instance.Health+1} : {90 + (25 * (PlayerDataManager.Instance.Health+1))}";
-        headText.text = $"현재 +{PlayerDataManager.Instance.Power} : {3 + (7 * PlayerDataManager.Instance.Power)}\n" + 
-                        $"다음 레벨 +{PlayerDataManager.Instance.Power+1} : {3 + (7 * (PlayerDataManager.Instance.Power+1))}";
-        featherText.text = $"현재 +{PlayerDataManager.Instance.Feather} : {40 + (40 * PlayerDataManager.Instance.Feather)}\n" + 
-                           $"다음 레벨 +{PlayerDataManager.Instance.Feather+1} : {40 + (40 * (PlayerDataManager.Instance.Feather+1))}";
-        
+
+        if (PlayerDataManager.Instance.Health + 1 > 4)
+        {
+            bodyText.text =
+                $"현재 +{PlayerDataManager.Instance.Health} : {90 + (25 * PlayerDataManager.Instance.Health)}";
+        }
+        else
+        {
+            bodyText.text =
+                $"현재 +{PlayerDataManager.Instance.Health} : {90 + (25 * PlayerDataManager.Instance.Health)}\n" +
+                $"다음 레벨 +{PlayerDataManager.Instance.Health + 1} : {90 + (25 * (PlayerDataManager.Instance.Health + 1))}";
+        }
+
+        if (PlayerDataManager.Instance.Power + 1 > 4)
+        {
+            headText.text =
+                $"현재 +{PlayerDataManager.Instance.Power} : {3 + (7 * PlayerDataManager.Instance.Power)}";
+        }
+        else
+        {
+            headText.text =
+                $"현재 +{PlayerDataManager.Instance.Power} : {3 + (7 * PlayerDataManager.Instance.Power)}\n" +
+                $"다음 레벨 +{PlayerDataManager.Instance.Power + 1} : {3 + (7 * (PlayerDataManager.Instance.Power + 1))}";
+        }
+
+        if (PlayerDataManager.Instance.Feather + 1 > 4)
+        {
+            featherText.text =
+                $"현재 +{PlayerDataManager.Instance.Feather} : {40 + (40 * PlayerDataManager.Instance.Feather)}";
+        }
+        else
+        {
+            featherText.text =
+                $"현재 +{PlayerDataManager.Instance.Feather} : {40 + (40 * PlayerDataManager.Instance.Feather)}\n" +
+                $"다음 레벨 +{PlayerDataManager.Instance.Feather + 1} : {40 + (40 * (PlayerDataManager.Instance.Feather + 1))}";
+        }
+
         switch (currentType)
         {
             case TrainType.Power:
@@ -102,15 +137,26 @@ public class TrainingManager : MonoBehaviour
                 break;
         }
 
-        if(price <= 4)
+        if (price > 4)
         {
-            buttonText.text = $"강화비용 : {price}";
-            trainButton.enabled = true;
+            buttonText.text = "최대강화입니다.";
+            trainButton.interactable = false;
+        }
+        else if (PlayerDataManager.Instance.Money < price)
+        {
+            buttonText.text = $"비용부족 : {price}";
+            trainButton.interactable = false;
         }
         else
         {
-            buttonText.text = "최대강화입니다.";
-            trainButton.enabled = false;
+            buttonText.text = $"강화비용 : {price}";
+            trainButton.interactable = true;
+        }
+
+        if (currentType == TrainType.None)
+        {
+            buttonText.text = "강화 선택";
+            trainButton.interactable = false;
         }
     }
 }

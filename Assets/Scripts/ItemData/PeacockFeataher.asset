@@ -15,9 +15,10 @@ MonoBehaviour:
   Key: 3
   Name: "\uACF5\uC791 \uAE43\uD138"
   price: 3
+  damage: 10
   Icon: {fileID: 21300000, guid: 5cfb6319dd0a2754ea4d5e4436cbde88, type: 3}
   BirdSprite: {fileID: -272789877, guid: 353cd0e73b95f32438b646443fbf9a73, type: 3}
   Tier: 3
-  attackData: {fileID: 11400000, guid: b783429e5f8eff64a9b23659bd3c8815, type: 2}
+  attackData: {fileID: 11400000, guid: eb61645485fe87f4195909466d4db3b2, type: 2}
   overrideController: {fileID: 22100000, guid: a4f4723ee1efb44458fef10d2ab101b0, type: 2}
-  detectedArea: {x: 0, y: 0, z: 0}
+  detectedArea: {x: 5.5, y: 5.5, z: 5.5}

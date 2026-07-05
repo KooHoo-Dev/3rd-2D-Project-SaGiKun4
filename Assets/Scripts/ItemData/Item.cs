@@ -6,7 +6,8 @@ public enum ItemTier
     Tier1,
     Tier2,
     Tier3,
-    Tier4
+    Tier4,
+    Infinite
 }
 
 public enum AttackType
@@ -21,6 +22,7 @@ public abstract class Item : ScriptableObject
     public int Key; // 아이템을 찾을 Key
     public string Name; // 아이템의 명칭
     public int price;
+    public int damage;
     public Sprite Icon; // 아이템의 Sprite 아이콘
     public Sprite BirdSprite;
     public ItemTier Tier;

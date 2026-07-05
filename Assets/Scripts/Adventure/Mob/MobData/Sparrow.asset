@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BirdData
   hp: 10
   damage: 0
+  birdName: Sparrow
   defaultSpeed: 2
   runSpeed: 3
   birdType: 0

@@ -7,7 +7,8 @@ public class PlayerDataManager : SingletonBase<PlayerDataManager>
     [field: SerializeField] public int Power { get; private set; }
     [field: SerializeField] public int Health { get; private set; }
     [field: SerializeField] public int Feather { get; private set; }
-    
+    [field: SerializeField] public int DefenceLevel { get; set; }
+
     public void TrainPower()
     {
         if (OddMoney(Power+1))

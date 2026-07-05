@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class ItemButtonBehaviour : MonoBehaviour
 {
     [SerializeField] private UnitSpawner spawner;
-    [SerializeField] private Item item;
+    [SerializeField] public Item item;
     [SerializeField] private Image image;
     [SerializeField] private TMP_Text itemName;
     [SerializeField] private TMP_Text itemCost;
@@ -28,6 +28,7 @@ public class ItemButtonBehaviour : MonoBehaviour
         if(item.CanBuy())
         {
             item.Buy();
+            AudioManager.Instance.PlaySfx(AudioManager.Sfx.Buy);
             gameObject.SetActive(false);
         }
         ContentController.Instance.Refresh();

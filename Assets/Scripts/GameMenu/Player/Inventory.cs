@@ -38,6 +38,7 @@ public class Inventory
         foreach (KeyValuePair<Item, int> pair in other.items)
         {
             AddItem(pair.Key, pair.Value);
+            UnlockManager.Instance.Unlock(pair.Key);
         }
     }
 
@@ -54,5 +55,10 @@ public class Inventory
         }
 
         return 0;
+    }
+
+    public bool IsEmpty()
+    {
+        return items.Count == 0;
     }
 }

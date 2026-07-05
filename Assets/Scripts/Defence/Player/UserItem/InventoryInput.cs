@@ -13,7 +13,6 @@ public class InventoryInput : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     private void Start()
     {
         raycaster = GetComponent<GraphicRaycaster>();
-        scrollRect  = GetComponent<ScrollRect>();
     }
 
     private Item GetItemOrNull(PointerEventData eventData)
@@ -62,7 +61,7 @@ public class InventoryInput : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         //  3.3 종료된 위치의 Slot에 아이템이 있을 경우
 
         Vector2 eventPos = Camera.main.ScreenToWorldPoint(eventData.position);
-        
+
         RaycastHit2D[] hits = Physics2D.RaycastAll(eventPos, Vector2.zero);
         
         if (hits != null)
@@ -72,9 +71,13 @@ public class InventoryInput : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
                 if (hit.collider.CompareTag("UnitMask"))
                 {
                     Unit hitUnit = hit.collider.GetComponentInChildren<Unit>();
-                    hitUnit.EquipItem(selectedItem);
-                    ContentController.Instance.Refresh();
-                    Debug.Log("유닛 실행");
+
+                    if (hitUnit != null)
+                    {
+                        hitUnit.EquipItem(selectedItem);
+                        ContentController.Instance.Refresh();
+                        Debug.Log("유닛 실행");
+                    }
                 }
             }
         }

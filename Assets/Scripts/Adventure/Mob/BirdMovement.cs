@@ -38,6 +38,11 @@ public class BirdMovement : MonoBehaviour
     private float timer = 0f;
     private Vector2 targetPos;
 
+    [SerializeField] private float runKeepTime = 1f;
+    private float runTimer;
+
+    private float soundTimer;
+
     [SerializeField] private State currentState = State.Idle;
 
     public Transform Player { get; private set; }
@@ -76,6 +81,8 @@ public class BirdMovement : MonoBehaviour
 
         // Idle 랜덤 이동 쿨타임
         timer = coolTime;
+
+        ResetSoundTimer();
     }
 
     private void Update()
@@ -89,6 +96,8 @@ public class BirdMovement : MonoBehaviour
 
             gameObject.SetActive(false);
         }
+
+        UpdateRandomSound();
 
         OrderState();
         ExecuteState();
@@ -134,10 +143,6 @@ public class BirdMovement : MonoBehaviour
             {
                 ChangeState(State.Attack);
             }
-            else
-            {
-                ChangeState(State.Idle);
-            }
 
             return;
         }
@@ -154,6 +159,11 @@ public class BirdMovement : MonoBehaviour
         {
             currentSkill.CancelSkill();
             currentSkill = null;
+        }
+
+        if (nextState == State.Run)
+        {
+            runTimer = runKeepTime;
         }
 
         path = null;
@@ -293,19 +303,27 @@ public class BirdMovement : MonoBehaviour
     {
         if (path == null || currentIndex >= path.Count)
         {
-            Vector2 runDir = ((Vector2)transform.position - (Vector2)Player.position).normalized;
+            if (runTimer <= 0f)
+            {
+                ChangeState(State.Idle);
+                return;
+            }
+
+            Vector2 runDir = ((Vector2)transform.position - (Vector2)PlayerBehaviour.Instance.transform.position).normalized;
             Vector2 runPosition = (Vector2)transform.position + runDir;
 
             Node targetNode = gridManager.NodePositionFromWorldPoint(runPosition);
 
             if (!targetNode.walkable)
             {
-                runDir = ((Vector2)Player.position - (Vector2)transform.position).normalized;
+                runDir = ((Vector2)PlayerBehaviour.Instance.transform.position - (Vector2)transform.position).normalized;
                 runPosition = (Vector2)transform.position + runDir * reflectDistance;
             }
 
             SetPathToTarget(runPosition);
         }
+
+        runTimer -= Time.deltaTime;
 
         Move(myRunSpeed);
     }
@@ -377,5 +395,45 @@ public class BirdMovement : MonoBehaviour
         myHp -= damage;
         hitEffect.gameObject.SetActive(true);
         hitEffect.Play();
+        PlaySound(1.5f);
+    }
+
+    private void PlaySound(float pitch = 1)
+    {
+        switch (birdData.birdName)
+        {
+            case "Sparrow":
+                AudioManager.Instance.PlaySfx(AudioManager.Sfx.Sparrow, pitch);
+                break;
+            case "Pigeon":
+                AudioManager.Instance.PlaySfx(AudioManager.Sfx.Pigeon, pitch);
+                break;
+            case "Peacock":
+                AudioManager.Instance.PlaySfx(AudioManager.Sfx.Peacock, pitch);
+                break;
+            case "Raven":
+                AudioManager.Instance.PlaySfx(AudioManager.Sfx.Raven, pitch);
+                break;
+        }
+    }
+
+    private void ResetSoundTimer()
+    {
+        soundTimer = Random.Range(5, 30);
+    }
+
+    private void UpdateRandomSound()
+    {
+        if (currentState == State.None)
+            return;
+
+        soundTimer -= Time.deltaTime;
+
+        if (soundTimer > 0f)
+            return;
+
+        PlaySound();
+
+        ResetSoundTimer();
     }
 }

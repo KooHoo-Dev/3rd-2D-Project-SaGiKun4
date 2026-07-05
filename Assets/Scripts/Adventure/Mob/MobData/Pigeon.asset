@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a56e51ec46952194d888b88e039db050, type: 3}
   m_Name: Pigeon
   m_EditorClassIdentifier: Assembly-CSharp::BirdData
-  hp: 10
+  hp: 25
   damage: 5
+  birdName: Pigeon
   defaultSpeed: 2
   runSpeed: 3
   birdType: 1

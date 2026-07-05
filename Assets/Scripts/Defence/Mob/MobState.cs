@@ -12,6 +12,7 @@ public class MobState : MonoBehaviour
     private Animator animator;
     private MeshRenderer meshRenderer;
     private Transform spriteFlipper;
+    private Transform hpBar;
 
     [SerializeField] private Transform[] mapPoint;
     [SerializeField] private Vector3 goalPoint;
@@ -19,7 +20,8 @@ public class MobState : MonoBehaviour
     private int mapPointIndex = 0;
 
     private float speed;
-    public int currentHp;
+    private int currentHp;
+    private int maxHp;
     public bool isDead = false;
 
     public void OnEnable()
@@ -27,17 +29,20 @@ public class MobState : MonoBehaviour
         meshRenderer = GetComponentInChildren<MeshRenderer>();
         spriteFlipper = GetComponentInChildren<Transform>();
         animator = GetComponentInChildren<Animator>();
+        hpBar = GetComponentInChildren<SpriteMask>().transform;
     }
 
     public void InitializeStat(MonsterData data, Transform[] roadPoints, Vector2 spawnPosition)
     {
         isDead = false;
-        currentHp = data.maxHp;
+        maxHp = data.maxHp;
+        currentHp = maxHp;
         speed = data.moveSpeed;
         meshRenderer.material = data.material;
         animator.runtimeAnimatorController = data.animatorController;
         transform.position = spawnPosition;
         spriteFlipper.localScale = Vector3.one;
+        hpBar.localScale = new Vector3(0.95f, 1f, 1f);
         mapPointIndex = 0;
 
         mapPoint = roadPoints;
@@ -93,11 +98,22 @@ public class MobState : MonoBehaviour
     private void Dead()
     {
         isDead = true;
+        GameFlowManager.Instance.defencePoint++;
+        ContentController.Instance.Refresh();
         animator.SetTrigger("Death");
     }
 
     public void TakeDamage(int damage)
     {
         currentHp -= damage;
+        UpdateHPBar();
+        AudioManager.Instance.PlaySfx(AudioManager.Sfx.Hit);
+    }
+
+    public void UpdateHPBar()
+    {
+        float ratio = (float)currentHp / maxHp;
+
+        hpBar.localScale = new Vector3(0.95f * ratio, transform.localScale.y, transform.localScale.z);
     }
 }

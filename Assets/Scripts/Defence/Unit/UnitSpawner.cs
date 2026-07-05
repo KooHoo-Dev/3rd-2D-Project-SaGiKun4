@@ -20,9 +20,9 @@ public class UnitSpawner : MonoBehaviour
 
     public int FindEmptySlot()
     {
-        for (int i = 0; i < units.Length; i++)
+        for (int i = 0; i < slots.Length; i++)
         {
-            if (units[i] == null)
+            if (slots[i].GetComponentInChildren<Unit>() == null)
                 return i;
         }
 

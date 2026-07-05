@@ -1,5 +1,3 @@
-using System.Transactions;
-using Study.Utilities;
 using UnityEngine;
 
 public class UserInputManager : MonoBehaviour

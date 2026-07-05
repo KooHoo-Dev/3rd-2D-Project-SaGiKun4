@@ -36,6 +36,8 @@ public class SceneLoader : SingletonBase<SceneLoader>
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        SceneFlowManager.Instance.ChangeScene(scene.name);
+
         if (scene.name != "LoadingScene")
         {
             StartCoroutine(FadeIn());

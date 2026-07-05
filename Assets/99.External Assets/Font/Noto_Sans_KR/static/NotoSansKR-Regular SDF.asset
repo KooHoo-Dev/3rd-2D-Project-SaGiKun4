@@ -12,15 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: NotoSansKR-Regular SDF
   m_EditorClassIdentifier: 
-  hashCode: -887855542
-  material: {fileID: 6898141960898469622}
-  materialHashCode: -504769750
   m_Version: 1.1.0
-  m_SourceFontFileGUID: f0ded0d62503219419fc2bc3bcf2378b
-  m_SourceFontFile_EditorRef: {fileID: 12800000, guid: f0ded0d62503219419fc2bc3bcf2378b,
-    type: 3}
-  m_SourceFontFile: {fileID: 0}
-  m_AtlasPopulationMode: 0
   m_FaceInfo:
     m_FaceIndex: 0
     m_FamilyName: Noto Sans KR
@@ -43,6 +35,33 @@ MonoBehaviour:
     m_StrikethroughOffset: 5.6
     m_StrikethroughThickness: 1.1999999
     m_TabWidth: 5
+  m_Material: {fileID: 6898141960898469622}
+  m_SourceFontFileGUID: f0ded0d62503219419fc2bc3bcf2378b
+  m_CreationSettings:
+    sourceFontFileName: 
+    sourceFontFileGUID: f0ded0d62503219419fc2bc3bcf2378b
+    faceIndex: 0
+    pointSizeSamplingMode: 1
+    pointSize: 24
+    padding: 5
+    paddingMode: 0
+    packingMode: 0
+    atlasWidth: 4096
+    atlasHeight: 4096
+    characterSetSelectionMode: 5
+    characterSequence: "44032-55203,\r\n12593-12643,\r\n4352-4607,\r\n48-57,\r\n65-90,\r\n97-122,\r\n32-47,\r\n58-64, 
+      \r\n91-96,  \r\n123-126,\r\n8220-8221,\r\n8216-8217,\r\n8230,     \r\n183,\r\n818, 
+      \r\n9647,"
+    referencedFontAssetGUID: 
+    referencedTextAssetGUID: 
+    fontStyle: 0
+    fontStyleModifier: 0
+    renderMode: 4165
+    includeFontFeatures: 0
+  m_SourceFontFile: {fileID: 0}
+  m_SourceFontFilePath: 
+  m_AtlasPopulationMode: 0
+  InternalDynamicOS: 0
   m_GlyphTable:
   - m_Index: 1
     m_Metrics:
@@ -220069,7 +220088,12 @@ MonoBehaviour:
   - {fileID: 7325215918352776150}
   m_AtlasTextureIndex: 0
   m_IsMultiAtlasTexturesEnabled: 0
+  m_GetFontFeatures: 1
   m_ClearDynamicDataOnBuild: 0
+  m_AtlasWidth: 4096
+  m_AtlasHeight: 4096
+  m_AtlasPadding: 5
+  m_AtlasRenderMode: 4165
   m_UsedGlyphRects:
   - m_X: 0
     m_Y: 0
@@ -268060,59 +268084,14 @@ MonoBehaviour:
     m_Y: 506
     m_Width: 1088
     m_Height: 179
-  m_fontInfo:
-    Name: 
-    PointSize: 0
-    Scale: 0
-    CharacterCount: 0
-    LineHeight: 0
-    Baseline: 0
-    Ascender: 0
-    CapHeight: 0
-    Descender: 0
-    CenterLine: 0
-    SuperscriptOffset: 0
-    SubscriptOffset: 0
-    SubSize: 0
-    Underline: 0
-    UnderlineThickness: 0
-    strikethrough: 0
-    strikethroughThickness: 0
-    TabWidth: 0
-    Padding: 0
-    AtlasWidth: 0
-    AtlasHeight: 0
-  atlas: {fileID: 0}
-  m_AtlasWidth: 4096
-  m_AtlasHeight: 4096
-  m_AtlasPadding: 5
-  m_AtlasRenderMode: 4165
-  m_glyphInfoList: []
-  m_KerningTable:
-    kerningPairs: []
   m_FontFeatureTable:
+    m_MultipleSubstitutionRecords: []
+    m_LigatureSubstitutionRecords: []
     m_GlyphPairAdjustmentRecords: []
-  fallbackFontAssets: []
+    m_MarkToBaseAdjustmentRecords: []
+    m_MarkToMarkAdjustmentRecords: []
+  m_ShouldReimportFontFeatures: 0
   m_FallbackFontAssetTable: []
-  m_CreationSettings:
-    sourceFontFileName: 
-    sourceFontFileGUID: f0ded0d62503219419fc2bc3bcf2378b
-    pointSizeSamplingMode: 1
-    pointSize: 24
-    padding: 5
-    packingMode: 0
-    atlasWidth: 4096
-    atlasHeight: 4096
-    characterSetSelectionMode: 5
-    characterSequence: "44032-55203,\r\n12593-12643,\r\n4352-4607,\r\n48-57,\r\n65-90,\r\n97-122,\r\n32-47,\r\n58-64, 
-      \r\n91-96,  \r\n123-126,\r\n8220-8221,\r\n8216-8217,\r\n8230,     \r\n183,\r\n818, 
-      \r\n9647,"
-    referencedFontAssetGUID: 
-    referencedTextAssetGUID: 
-    fontStyle: 0
-    fontStyleModifier: 0
-    renderMode: 4165
-    includeFontFeatures: 0
   m_FontWeightTable:
   - regularTypeface: {fileID: 0}
     italicTypeface: {fileID: 0}
@@ -268141,6 +268120,33 @@ MonoBehaviour:
   boldSpacing: 7
   italicStyle: 35
   tabSize: 10
+  m_fontInfo:
+    Name: 
+    PointSize: 0
+    Scale: 0
+    CharacterCount: 0
+    LineHeight: 0
+    Baseline: 0
+    Ascender: 0
+    CapHeight: 0
+    Descender: 0
+    CenterLine: 0
+    SuperscriptOffset: 0
+    SubscriptOffset: 0
+    SubSize: 0
+    Underline: 0
+    UnderlineThickness: 0
+    strikethrough: 0
+    strikethroughThickness: 0
+    TabWidth: 0
+    Padding: 0
+    AtlasWidth: 0
+    AtlasHeight: 0
+  m_glyphInfoList: []
+  m_KerningTable:
+    kerningPairs: []
+  fallbackFontAssets: []
+  atlas: {fileID: 0}
 --- !u!21 &6898141960898469622
 Material:
   serializedVersion: 8
@@ -268249,6 +268255,7 @@ Material:
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!28 &7325215918352776150
 Texture2D:
   m_ObjectHideFlags: 0
@@ -268259,10 +268266,8 @@ Texture2D:
   m_ImageContentsHash:
     serializedVersion: 2
     Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
   m_IsAlphaChannelOptional: 0
-  serializedVersion: 2
+  serializedVersion: 4
   m_Width: 4096
   m_Height: 4096
   m_CompleteImageSize: 16777216

@@ -6,6 +6,8 @@ public class RollManager : MonoBehaviour
     [SerializeField] private Item[] allItems;
     [SerializeField] private ItemButtonBehaviour[] shopButtons;
 
+    private int rerollPrice = 1;
+
     private readonly Dictionary<ItemTier, List<Item>> tierItems = new();
 
     private void OnEnable()
@@ -19,7 +21,7 @@ public class RollManager : MonoBehaviour
 
         foreach (Item defenceItem in allItems)
         {
-            if (!UnlockManager.Instance.IsUnlocked(defenceItem))
+            if (defenceItem.Tier != ItemTier.Unit && !UnlockManager.Instance.IsUnlocked(defenceItem))
                 continue;
 
             if (!tierItems.ContainsKey(defenceItem.Tier))
@@ -70,6 +72,9 @@ public class RollManager : MonoBehaviour
 
     public void Reroll()
     {
+        if (GameFlowManager.Instance.defencePoint < rerollPrice) return;
+
+        GameFlowManager.Instance.defencePoint = GameFlowManager.Instance.defencePoint - rerollPrice;
         for (int i = 0; i < shopButtons.Length; i++)
         {
             shopButtons[i].gameObject.SetActive(true);
@@ -79,5 +84,7 @@ public class RollManager : MonoBehaviour
                 shopButtons[i].SetItem(item);
             }
         }
+        ContentController.Instance.Refresh();
+        AudioManager.Instance.PlaySfx(AudioManager.Sfx.Reroll);
     }
 }

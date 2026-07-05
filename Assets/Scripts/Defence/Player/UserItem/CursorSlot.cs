@@ -29,6 +29,6 @@ public class CursorSlot : MonoBehaviour
 
     public void SetPosition(Vector2 inputPosition)
     {
-        rectTransform.anchoredPosition = inputPosition;
+        rectTransform.position = inputPosition;
     }
 }

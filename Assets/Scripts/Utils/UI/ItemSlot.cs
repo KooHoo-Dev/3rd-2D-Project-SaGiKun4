@@ -9,7 +9,6 @@ public class ItemSlot : MonoBehaviour
     [field: SerializeField] public Item item {get; private set;}
     [field: SerializeField] public TMP_Text nameTxt { get; private set; }
     [field: SerializeField] public TMP_Text countTxt {get; private set;}
-    private int count;
 
     private void Start()
     {

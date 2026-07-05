@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1152b3a7fd399a409c259247e3858cd, type: 3}
   m_Name: Hyena
   m_EditorClassIdentifier: Assembly-CSharp::MonsterData
-  maxHp: 30
+  maxHp: 20
   moveSpeed: 1
   material: {fileID: 2100000, guid: 718eee6c6530de24eba9c80c4f7c41c1, type: 2}
   animatorController: {fileID: 9100000, guid: ea2bb2490e307af4ebffeef231149368, type: 2}

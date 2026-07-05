@@ -1,7 +1,4 @@
-using Study.Utilities;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 public class AdventureManager : MonoBehaviour
 {
@@ -20,11 +17,18 @@ public class AdventureManager : MonoBehaviour
 
     public void QuitAdventure()
     {
+        if (UnlockManager.Instance.GetUnlockedItemCount() == 0 && InventoryManager.Instance.TempInventory.IsEmpty())
+        {
+            FailAdventure();
+            return;
+        }
+
         InventoryManager.Instance.Inventory.Merge(InventoryManager.Instance.TempInventory);
         InventoryManager.Instance.TempInventory.Clear();
         GameManager.Instance.QuitAdventure();
         SceneLoader.Instance.LoadScene("GameMenu");
     }
+
     public void FailAdventure()
     {
         InventoryManager.Instance.TempInventory.Clear();

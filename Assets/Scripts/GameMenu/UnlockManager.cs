@@ -1,8 +1,6 @@
 using Jay;
-using Study.Utilities;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class UnlockManager : SingletonBase<UnlockManager>
 {
@@ -16,5 +14,10 @@ public class UnlockManager : SingletonBase<UnlockManager>
     public void Unlock(Item item)
     {
         unlockedItems.Add(item);
+    }
+
+    public int GetUnlockedItemCount()
+    {
+        return unlockedItems.Count;
     }
 }

@@ -62,6 +62,12 @@ public class GameFlowManager : MonoBehaviour
         int minutes = Mathf.FloorToInt(timer / 60f);
         int seconds = Mathf.FloorToInt(timer % 60f);
 
+        if (minutes < 0)
+            minutes = 0;
+
+        if (seconds < 0)
+            seconds = 0;
+
         timerTxt.text = $"{minutes:00}:{seconds:00}";
     }
 
@@ -76,6 +82,8 @@ public class GameFlowManager : MonoBehaviour
 
         UpdateTimerUI();
         MonsterSpawner.Instance.StartSpawn();
+
+        ContentController.Instance.Refresh();
     }
 
     public void StopSpawning()
@@ -116,6 +124,14 @@ public class GameFlowManager : MonoBehaviour
     public void ShowResult(bool isWin)
     {
         resultPanel.SetActive(true);
+
+        if (isWin)
+        {
+            PlayerDataManager.Instance.DefenceLevel++;
+        }
+
+        if (!isWin)
+            killCount /= 2;
 
         titleText.text = isWin ? "승리" : "패배";
         scoreText.text = $"처치 : {killCount}";

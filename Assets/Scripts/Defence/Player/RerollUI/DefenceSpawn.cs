@@ -14,6 +14,5 @@ public class DefenceSpawn : Item
     {
         GameFlowManager.Instance.defencePoint = GameFlowManager.Instance.defencePoint - price;
         UnitSpawner.Instance.Spawn(unitPrefab);
-        Debug.Log("구매완료(소환)");
     }
 }
