@@ -67,15 +67,12 @@ public class OptionManager : SingletonBase<OptionManager>
         switch (index)
         {
             case 1:
-                SetResolution(1024, 768, false);
-                break;
-            case 2:
                 SetResolution(1280, 720, false);
                 break;
-            case 3:
+            case 2:
                 SetResolution(1366, 768, false);
                 break;
-            case 4:
+            case 3:
                 SetResolution(1920, 1080, false);
                 break;
         }
@@ -83,7 +80,7 @@ public class OptionManager : SingletonBase<OptionManager>
 
     public string GetResolutionText()
     {
-        return $"{CurrentWidth}x{CurrentHeight}";
+        return $"{CurrentWidth} x {CurrentHeight}";
     }
 
     public void QuitGame()

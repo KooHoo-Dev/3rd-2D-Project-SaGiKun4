@@ -34,6 +34,11 @@ public class GameFlowManager : MonoBehaviour
 
     private void Start()
     {
+        InitGame();
+
+        if (TutorialManager.Instance.CurrentState == TutorialManager.TutorialState.Defence)
+        return;
+
         StartGame();
     }
 
@@ -75,8 +80,6 @@ public class GameFlowManager : MonoBehaviour
     {
         timer = gameTime;
         IsRunning = true;
-        killCount = 0;
-        defencePoint = 10;
         aliveMonsters.Clear();
         resultPanel.SetActive(false);
 
@@ -84,6 +87,12 @@ public class GameFlowManager : MonoBehaviour
         MonsterSpawner.Instance.StartSpawn();
 
         ContentController.Instance.Refresh();
+    }
+
+    public void InitGame()
+    {
+        killCount = 0;
+        defencePoint = 10;
     }
 
     public void StopSpawning()

@@ -10,6 +10,7 @@ public class PlayerUIController : MonoBehaviour
     [SerializeField] private TMP_Text HPText;
 
     [SerializeField] private TMP_Text heightText;
+    [SerializeField] private TMP_Text maxHeightText;
     [SerializeField] private Transform heightStandard;
 
     [SerializeField] private Color normalColor = Color.white;
@@ -26,6 +27,11 @@ public class PlayerUIController : MonoBehaviour
         }
 
         Instance = this;
+    }
+
+    private void Start()
+    {
+        maxHeightText.text = $"{PlayerBehaviour.Instance.maxHeight}m";
     }
 
     private void Update()
